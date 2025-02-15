@@ -1,6 +1,21 @@
-# ZimDevelopers.com
+<p align="center">
+  <a href="https://zimdevelopers.com/"><img src="images/brand.png" height="128"></a>
+  <h2 align="center"><a href="https://roadmap.sh">roadmap.sh</a></h2>
+  <p align="center">A tool for learning, sharing, and promoting developers<p>
+  <p align="center">
+    <a href="https://x.com/zimdevlabs">
+      <img src="https://img.shields.io/badge/@zimdevlabs-twitter-blue" alt="zimdevlabs twitter" />
+    </a>
+     <a href="https://www.youtube.com/@zimdevlabs">
+      <img src="https://img.shields.io/badge/@zimdevlabs-youtube-red" alt="zimdevlabs youtube" />
+    </a>
+     <a href="https://www.instagram.com/zimdevlabs/">
+      <img src="https://img.shields.io/badge/@zimdevlabs-instagram-pink" alt="zimdevlabs instagram" />
+    </a>
+  </p>
+</p>
 
-Welcome to ZimDevelopers.com, an open-source project based in Zimbabwe! This platform is designed to be a tool for learning, sharing, and promoting developers, with a special focus on the Zimbabwean tech community.
+<br>
 
 ## Project Goals
 
