@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://zimdevelopers.com/"><img src="images/brand.png" height="128"></a>
-  <h2 align="center"><a href="https://roadmap.sh">roadmap.sh</a></h2>
+  <h2 align="center"><a href="https://roadmap.sh">zimdevelopers.com</a></h2>
   <p align="center">A tool for learning, sharing, and promoting developers<p>
   <p align="center">
     <a href="https://x.com/zimdevlabs">
