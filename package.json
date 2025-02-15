@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "zimdevlabs",
   "private": true,
   "scripts": {
     "build": "turbo run build",
