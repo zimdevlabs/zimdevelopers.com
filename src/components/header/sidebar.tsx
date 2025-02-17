@@ -106,13 +106,26 @@ export default function SideBar() {
               </div>
             </Collapsible>
           ))}
-          <Link
-            href="#"
-            className="flex gap-2 items-center w-full border border-zinc-200 dark:border-white/20 rounded-md px-2 py-3 text-sm"
-          >
-            <BookOpen className="size-4" />
-            <span>Blog</span>
-          </Link>
+          <div className="w-full border border-zinc-200 dark:border-white/20 rounded-md px-2 py-3 text-sm">
+            <div className="flex gap-2 items-center mb-4">
+              <BookOpen className="size-4" />
+              <span>Blog</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Link
+                href="#"
+                className="w-full px-4 py-2 block text-center border border-zinc-200 dark:border-white/20 rounded-md"
+              >
+                Read
+              </Link>
+              <Link
+                href="#"
+                className="w-full px-4 py-2 block text-center bg-zinc-900 dark:bg-primaryColor rounded-md text-white"
+              >
+                Write
+              </Link>
+            </div>
+          </div>
           <Link
             className="border border-zinc-200 dark:border-white/20 flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
             href="#"
