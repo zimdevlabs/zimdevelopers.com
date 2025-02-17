@@ -12,7 +12,6 @@ import {
 import { Icons } from "../icons";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -49,12 +48,12 @@ export default function Header() {
       >
         <div className="flex flex-1">
           <div className="hidden lg:flex lg:gap-x-6">
-            <Button
-              variant="outline"
-              className="text-zinc-700 hover:text-zinc-900 dark:text-white/80 dark:hover:text-white"
+            <Link
+              href="/studio"
+              className="text-zinc-700 block px-4 py-2 border border-zinc-200 hover:bg-zinc-200 dark:border-white/20 dark:hover:bg-white/20 text-sm rounded-md  hover:text-zinc-900 dark:text-white/80 dark:hover:text-white"
             >
               Write Article
-            </Button>
+            </Link>
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
