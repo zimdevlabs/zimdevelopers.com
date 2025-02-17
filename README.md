@@ -1,66 +1,36 @@
-<p align="center">
-  <a href="https://zimdevelopers.com/"><img src="images/brand.png" height="128"></a>
-  <h2 align="center"><a href="https://zimdevelopers.com">zimdevelopers.com</a></h2>
-  <p align="center">A tool for learning, sharing, and promoting developers<p>
-  <p align="center">
-    <a href="https://x.com/zimdevlabs">
-      <img src="https://img.shields.io/badge/@zimdevlabs-twitter-blue" alt="zimdevlabs twitter" />
-    </a>
-     <a href="https://www.youtube.com/@zimdevlabs">
-      <img src="https://img.shields.io/badge/@zimdevlabs-youtube-red" alt="zimdevlabs youtube" />
-    </a>
-     <a href="https://www.instagram.com/zimdevlabs/">
-      <img src="https://img.shields.io/badge/@zimdevlabs-instagram-pink" alt="zimdevlabs instagram" />
-    </a>
-  </p>
-</p>
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<br>
+## Getting Started
 
-## Project Goals
+First, run the development server:
 
-- Provide a space for developers to learn and grow
-- Share knowledge and resources within the developer community
-- Promote Zimbabwean developers and their skills
-- Foster collaboration on open-source projects
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Planned Features
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-We have several exciting features in the pipeline:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- A blog where developers can post articles
-- Developer profiles for portfolio and skills showcase
-- UI design showcase (images, videos, vector graphics, templates)
-- Developer rankings, badges, and recommendations for freelancers and full-time employees
-- Open-source projects sharing
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-More features will be announced as the project progresses.
+## Learn More
 
-## How to Contribute
+To learn more about Next.js, take a look at the following resources:
 
-We welcome contributions from developers of all skill levels! Here's how you can get involved:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-1. Join the Zim Developers Labs group on WhatsApp: [Join here](https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX)
-2. Follow our project progress on GitHub: [ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
-3. Watch for announcements and contribute to discussions
-4. Submit pull requests for new features or bug fixes
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Connect With Us
+## Deploy on Vercel
 
-Stay updated with our progress and connect with the community through our social media channels:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- Twitter: [@zimdevlabs](https://twitter.com/zimdevlabs)
-- Instagram: [@zimdevlabs](https://instagram.com/zimdevlabs)
-- LinkedIn: [ZimDevLabs](https://linkedin.com/company/zimdevlabs)
-- YouTube: [ZimDevLabs](https://youtube.com/zimdevlabs)
-- GitHub: [zimdevlabs](https://github.com/zimdevlabs)
-- Patreon: [ZimDevLabs](https://patreon.com/zimdevlabs)
-
-## Project Progress
-
-You can track the development progress and contribute to the project on our GitHub project board:
-[ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
-
----
-
-We're excited to have you join us on this journey to empower and showcase Zimbabwean developers. Let's build something amazing together!
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
