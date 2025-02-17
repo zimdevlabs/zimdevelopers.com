@@ -10,7 +10,7 @@ import Banner from "@/components/banner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Zim Developers Labs",
+  title: "Zim Developers Community",
   description: "A feature rich developer community",
 };
 

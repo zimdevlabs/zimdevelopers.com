@@ -38,7 +38,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-zinc-700"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-zinc-700 hover:text-zinc-900 dark:text-white/80 dark:hover:text-white"
             >
               <span className="sr-only">Open main menu</span>
               <Menu aria-hidden="true" className="h-5 w-5" />
