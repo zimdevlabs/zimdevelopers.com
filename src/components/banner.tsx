@@ -36,16 +36,14 @@ export default function Banner() {
           />
         </div>
         <div className="flex items-center gap-x-4 gap-y-2">
-          <p className="text-sm leading-6 text-white">
-            Get your project built for free
-          </p>
+          <p className="text-sm leading-6 text-white">Don&#39;t Work Alone!</p>
           <div
             onClick={() => {
               window.open(`#`);
             }}
-            className="flex-none cursor-pointer rounded-full bg-zinc-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+            className="flex-none cursor-pointer rounded-full bg-white dark:bg-zinc-900 px-3.5 py-1 text-sm dark:text-white dark:hover:bg-zinc-700"
           >
-            Challenge
+            Join a Team
           </div>
         </div>
         <div className="flex flex-1 justify-end">

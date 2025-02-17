@@ -1,7 +1,7 @@
 import { SVGProps } from "react";
 import { JSX } from "react/jsx-runtime";
 import { ModeToggle } from "./theme-toggler";
-import LogoIcon from "../icons/logo-icon";
+import { Icons } from "../icons";
 
 const navigation = {
   solutions: [
@@ -97,7 +97,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
-            <LogoIcon className="h-10 w-fit" />
+            <Icons.logo className="h-10 w-fit" />
             <p className="text-balance text-sm/6 text-foreground">
               Made by developers for developers.
             </p>

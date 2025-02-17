@@ -28,13 +28,13 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
           <Banner />
           <Header />
-          {children}
+          <main className="bg-white text-zinc-900">{children}</main>
           <Footer />
         </ThemeProvider>
         <Analytics />
