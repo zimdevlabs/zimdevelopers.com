@@ -34,9 +34,9 @@ const components: { title: string; href: string; description: string }[] = [
       "No need to start from scratch, use premade templates from other developers.",
   },
   {
-    title: "Projects",
+    title: "Jobs",
     href: "#",
-    description: "Post a project or request to take part in open projects.",
+    description: "Post a job or request to take part in open jobs.",
   },
 ];
 
