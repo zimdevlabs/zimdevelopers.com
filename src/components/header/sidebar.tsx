@@ -119,7 +119,7 @@ export default function SideBar() {
                 Read
               </Link>
               <Link
-                href="#"
+                href="/studio"
                 className="w-full px-4 py-2 block text-center bg-zinc-900 dark:bg-primaryColor rounded-md text-white"
               >
                 Write

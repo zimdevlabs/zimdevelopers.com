@@ -59,35 +59,54 @@ export default function Header() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Developers</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                    <ul className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-2">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/"
+                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md relative hover:from-muted/80 group"
+                            href="/solo-developers/browse"
                           >
                             <Icons.logo className="h-6 w-6" />
-                            <div className="mb-2 mt-4 text-lg font-medium relative">
-                              Dev Teams
-                              <span className="absolute block px-2 rounded-full bg-violet-600 text-white -top-4 text-xs right-4">
-                                new
+                            <div className="mb-2 mt-4 text-lg font-medium group-hover:text-primaryColor">
+                              Solo Developers
+                              <span className="absolute block px-2 rounded-full bg-orange-600 text-white top-4 text-xs right-4">
+                                popular
                               </span>
                             </div>
                             <p className="text-sm leading-tight text-muted-foreground">
-                              No need to work alone create or join a team of
-                              developers you can collaborate with
+                              Work with individuals for small scale projects
+                              which need to be done in smaller time frames.
                             </p>
                           </Link>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="#" title="Solo Developers">
-                        Developers who mostly work alone
+                      <li className="row-span-3">
+                        <NavigationMenuLink asChild>
+                          <Link
+                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md relative hover:from-muted/80 group"
+                            href="/teams/browse"
+                          >
+                            <Icons.logo className="h-6 w-6" />
+                            <div className="mb-2 mt-4 text-lg font-medium group-hover:text-primaryColor">
+                              Developer Teams
+                              <span className="absolute block px-2 rounded-full bg-violet-600 text-white top-4 text-xs right-4">
+                                new
+                              </span>
+                            </div>
+                            <p className="text-sm leading-tight text-muted-foreground">
+                              Work with a group of teams who can collaborate on
+                              larger scale projects
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                      <ListItem href="/solo-developers" title="Solo Developers">
+                        Developers who mostly work alone Register as a solo
+                        developer
                       </ListItem>
-                      <ListItem href="#" title="Team Developers">
-                        Developers who work in groups.
-                      </ListItem>
-                      <ListItem href="#" title="Organisations">
-                        Software development companies
+                      <ListItem href="/teams" title="Team Developers">
+                        create or join a team of developers you can collaborate
+                        with
                       </ListItem>
                     </ul>
                   </NavigationMenuContent>
@@ -97,13 +116,13 @@ export default function Header() {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                       {components.map((component) => (
-                        <ListItem
+                        <ListItem2
                           key={component.title}
                           title={component.title}
                           href={component.href}
                         >
                           {component.description}
-                        </ListItem>
+                        </ListItem2>
                       ))}
                     </ul>
                   </NavigationMenuContent>
@@ -134,8 +153,8 @@ export default function Header() {
             href="#"
             className="text-sm bg-primaryColor hover:bg-primaryColor/80 px-4 py-2 rounded-md text-white"
           >
-            <span className="hidden md:inline-block">Find a Developer</span>
-            <span className="md:hidden">Find&nbsp;Developer</span>
+            <span className="hidden md:inline-block">Post a Project</span>
+            <span className="md:hidden">Post&nbsp;Project</span>
           </Link>
           <Link
             href="#"
@@ -165,6 +184,35 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground relative",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+          <span className="text-sm text-primaryColor absolute top-0 right-2">
+            Register
+          </span>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
+
+const ListItem2 = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
@@ -179,4 +227,4 @@ const ListItem = React.forwardRef<
     </li>
   );
 });
-ListItem.displayName = "ListItem";
+ListItem2.displayName = "ListItem2";

@@ -85,14 +85,14 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Headers</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6
                   </pre>
                 </section>
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Emphasis</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     *italic* or _italic_ **bold** or __bold__ ***bold italic***
                     or ___bold italic___
                   </pre>
@@ -100,7 +100,7 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Lists</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     Unordered: - Item 1 - Item 2 - Subitem 2.1 - Subitem 2.2
                     Ordered: 1. First item 2. Second item 3. Third item
                   </pre>
@@ -108,7 +108,7 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Links</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     [Link text](https://www.example.com) [Link with
                     title](https://www.example.com &quot;Title text&quot;)
                   </pre>
@@ -116,7 +116,7 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Images</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     ![Alt text](image-url.jpg) ![Alt text](image-url.jpg
                     &quot;Optional title&quot;)
                   </pre>
@@ -124,14 +124,14 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Blockquotes</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     &gt; This is a blockquote &gt; It can span multiple lines
                   </pre>
                 </section>
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Code</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     Inline code: `code` Code block: ``` function example() {"{"}
                     console.log(&quot;Hello, world!&quot;);
                     {"}"}
@@ -141,7 +141,7 @@ export function NavProjects() {
 
                 <section className="mb-6">
                   <h3 className="text-lg mb-2">Horizontal Rule</h3>
-                  <pre className="bg-white p-2 rounded border">
+                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
                     --- or *** or ___
                   </pre>
                 </section>
