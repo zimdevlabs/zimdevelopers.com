@@ -2,42 +2,14 @@ import Link from "next/link";
 import SideBar from "./sidebar";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Icons } from "../icons";
 import React from "react";
 import { cn } from "@/lib/utils";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Roadmaps",
-    href: "#",
-    description:
-      "Find a straight forward learning path and track your progress",
-  },
-  {
-    title: "UI Designs",
-    href: "#",
-    description:
-      "Get inspiration or show off your work as part of your portfolio.",
-  },
-  {
-    title: "Code Templates",
-    href: "#",
-    description:
-      "No need to start from scratch, use premade templates from other developers.",
-  },
-  {
-    title: "Jobs",
-    href: "#",
-    description: "Post a job or request to take part in open jobs.",
-  },
-];
 
 export default function Header() {
   return (
@@ -57,78 +29,7 @@ export default function Header() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Developers</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-2">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md relative hover:from-muted/80 group"
-                            href="/solo-developers/browse"
-                          >
-                            <Icons.logo className="h-6 w-6" />
-                            <div className="mb-2 mt-4 text-lg font-medium group-hover:text-primaryColor">
-                              Solo Developers
-                              <span className="absolute block px-2 rounded-full bg-orange-600 text-white top-4 text-xs right-4">
-                                popular
-                              </span>
-                            </div>
-                            <p className="text-sm leading-tight text-muted-foreground">
-                              Work with individuals for small scale projects
-                              which need to be done in smaller time frames.
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md relative hover:from-muted/80 group"
-                            href="/teams/browse"
-                          >
-                            <Icons.logo className="h-6 w-6" />
-                            <div className="mb-2 mt-4 text-lg font-medium group-hover:text-primaryColor">
-                              Developer Teams
-                              <span className="absolute block px-2 rounded-full bg-violet-600 text-white top-4 text-xs right-4">
-                                new
-                              </span>
-                            </div>
-                            <p className="text-sm leading-tight text-muted-foreground">
-                              Work with a group of teams who can collaborate on
-                              larger scale projects
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <ListItem href="/solo-developers" title="Solo Developers">
-                        Developers who mostly work alone Register as a solo
-                        developer
-                      </ListItem>
-                      <ListItem href="/teams" title="Team Developers">
-                        create or join a team of developers you can collaborate
-                        with
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {components.map((component) => (
-                        <ListItem2
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem2>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link href="/docs" legacyBehavior passHref>
+                  <Link href="/blog" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
@@ -153,8 +54,8 @@ export default function Header() {
             href="#"
             className="text-sm bg-primaryColor hover:bg-primaryColor/80 px-4 py-2 rounded-md text-white"
           >
-            <span className="hidden md:inline-block">Post a Project</span>
-            <span className="md:hidden">Post&nbsp;Project</span>
+            <span className="hidden md:inline-block">Create Free Account</span>
+            <span className="md:hidden">Create&nbsp;Account</span>
           </Link>
           <Link
             href="#"
