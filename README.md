@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ZimDevelopers.com
 
-## Getting Started
+Welcome to ZimDevelopers.com, an open-source project based in Zimbabwe! This platform is designed to be a tool for learning, sharing, and promoting developers, with a special focus on the Zimbabwean tech community.
 
-First, run the development server:
+## Project Goals
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Provide a space for developers to learn and grow
+- Share knowledge and resources within the developer community
+- Promote Zimbabwean developers and their skills
+- Foster collaboration on open-source projects
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Planned Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+We have several exciting features in the pipeline:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- A blog where developers can post articles
+- Developer profiles for portfolio and skills showcase
+- UI design showcase (images, videos, vector graphics, templates)
+- Developer rankings, badges, and recommendations for freelancers and full-time employees
+- Open-source projects sharing
 
-## Learn More
+More features will be announced as the project progresses.
 
-To learn more about Next.js, take a look at the following resources:
+## How to Contribute
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We welcome contributions from developers of all skill levels! Here's how you can get involved:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Join the Zim Developers Labs group on WhatsApp: [Join here](https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX)
+2. Follow our project progress on GitHub: [ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
+3. Watch for announcements and contribute to discussions
+4. Submit pull requests for new features or bug fixes
 
-## Deploy on Vercel
+## Connect With Us
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Stay updated with our progress and connect with the community through our social media channels:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Twitter: [@zimdevlabs](https://twitter.com/zimdevlabs)
+- Instagram: [@zimdevlabs](https://instagram.com/zimdevlabs)
+- LinkedIn: [ZimDevLabs](https://linkedin.com/company/zimdevlabs)
+- YouTube: [ZimDevLabs](https://youtube.com/zimdevlabs)
+- GitHub: [zimdevlabs](https://github.com/zimdevlabs)
+- Patreon: [ZimDevLabs](https://patreon.com/zimdevlabs)
+
+## Project Progress
+
+You can track the development progress and contribute to the project on our GitHub project board:
+[ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
+
+---
+
+We're excited to have you join us on this journey to empower and showcase Zimbabwean developers. Let's build something amazing together!
