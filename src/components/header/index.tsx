@@ -45,20 +45,20 @@ export default function Header() {
           </div>
           <Icons.logo className="h-8 w-fit md:hidden ml-3" />
         </div>
-        <a href="#" className="-m-1.5 p-1.5">
+        <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Zim Developers</span>
           <Icons.logo className="h-8 w-fit hidden md:block" />
-        </a>
+        </Link>
         <div className="flex flex-1 justify-end items-center gap-3 md:gap-4">
           <Link
-            href="#"
+            href="/sign-up"
             className="text-sm bg-primaryColor hover:bg-primaryColor/80 px-4 py-2 rounded-md text-white"
           >
             <span className="hidden md:inline-block">Create Free Account</span>
             <span className="md:hidden">Create&nbsp;Account</span>
           </Link>
           <Link
-            href="#"
+            href="/sign-in"
             className="text-sm leading-6 text-zinc-700 hover:text-zinc-900 dark:text-white/80 dark:hover:text-white group"
           >
             Log&nbsp;in&nbsp;
