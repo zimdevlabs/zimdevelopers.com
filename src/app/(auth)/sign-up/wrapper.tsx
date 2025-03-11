@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import Phase2 from "./components/phases/phase-2"
-import Phase1 from "./components/phases/phase-1"
+// import Phase1 from "./components/phases/phase-1"
 
 export default function SignUpPageWrapper() {
   return (
@@ -33,8 +33,8 @@ export default function SignUpPageWrapper() {
             </blockquote>
           </div>
         </div>
-        <Phase1 />
-        {/* <Phase2 /> */}
+        {/* <Phase1 /> */}
+        <Phase2 />
       </div>
   )
 }
