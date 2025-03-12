@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     >
       <body>
         <main className="bg-white text-zinc-900">{children}</main>
+        <ToastContainer position="top-center" />
         <Analytics />
       </body>
     </html>
