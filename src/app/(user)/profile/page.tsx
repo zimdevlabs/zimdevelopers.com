@@ -49,12 +49,11 @@ export default function ProfilePage({
   const userDetails = mockUser;
 
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Profile Card */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="w-full py-8 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-3 bg-white rounded-lg shadow overflow-hidden w-full">
           {/* Header */}
-          <div className="flex flex-col items-center text-center p-6 border-b">
+          <div className="flex flex-col items-center text-center p-6 border-b w-full">
             <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100">
               {userDetails.avatar ? (
                 <img 
@@ -83,8 +82,8 @@ export default function ProfilePage({
           </div>
           
           {/* User Info */}
-          <div className="p-6">
-            <div className="space-y-4">
+          <div className="w-full py-6">
+            <div className="space-y-4 flex flex-col items-center text-center">
               <div className="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span className="text-sm">Member since {userDetails.createdAt.toLocaleDateString()}</span>
@@ -145,123 +144,125 @@ export default function ProfilePage({
           </div>
         </div>
         
-        {/* Profile Edit Form - Only show for own profile */}
-        {isOwnProfile ? (
-          <div className="bg-white rounded-lg shadow overflow-hidden md:col-span-2">
-            <div className="p-6 border-b">
-              <h2 className="text-xl font-bold">Profile Details</h2>
-              <p className="text-sm text-gray-500">
-                Update your personal information
-              </p>
-            </div>
-            
-            <div className="p-6">
-              <form action="#" method="POST" className="space-y-6">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
-                    <input 
-                      id="name" 
-                      name="name"
-                      defaultValue={userDetails.name}
-                      placeholder="John Doe"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      required
-                    />
-                    <p className="text-sm text-gray-500">
-                      Your full name will be displayed on your profile.
-                    </p>
+        <div className="lg:col-span-9 bg-white rounded-lg shadow overflow-hidden">
+          {/* Profile Edit Form - Only show for own profile */}
+          {isOwnProfile ? (
+            <>
+              <div className="p-6 border-b">
+                <h2 className="text-xl font-bold">Profile Details</h2>
+                <p className="text-sm text-gray-500">
+                  Update your personal information
+                </p>
+              </div>
+              
+              <div className="p-6">
+                <form action="#" method="POST" className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
+                      <input 
+                        id="name" 
+                        name="name"
+                        defaultValue={userDetails.name}
+                        placeholder="John Doe"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                      <p className="text-sm text-gray-500">
+                        Your full name will be displayed on your profile.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="username" className="block text-sm font-medium">Username</label>
+                      <input 
+                        id="username" 
+                        name="username"
+                        defaultValue={userDetails.username}
+                        placeholder="username"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                      <p className="text-sm text-gray-500">
+                        This is your public username. It can only contain letters, numbers, underscores, and hyphens.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="whatsAppNumber" className="block text-sm font-medium">WhatsApp Number</label>
+                      <input 
+                        id="whatsAppNumber" 
+                        name="whatsAppNumber"
+                        defaultValue={userDetails.whatsAppNumber}
+                        placeholder="+263 123 456 789"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <p className="text-sm text-gray-500">
+                        Your WhatsApp number for contact purposes.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="city" className="block text-sm font-medium">City</label>
+                      <input 
+                        id="city" 
+                        name="city"
+                        defaultValue={userDetails.city}
+                        placeholder="Harare"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <p className="text-sm text-gray-500">
+                        Your current city of residence.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="avatar" className="block text-sm font-medium">Profile Picture URL</label>
+                      <input 
+                        id="avatar" 
+                        name="avatar"
+                        defaultValue={userDetails.avatar}
+                        placeholder="https://example.com/avatar.jpg"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <p className="text-sm text-gray-500">
+                        Enter a URL for your profile picture.
+                      </p>
+                    </div>
                   </div>
                   
-                  <div className="space-y-2">
-                    <label htmlFor="username" className="block text-sm font-medium">Username</label>
-                    <input 
-                      id="username" 
-                      name="username"
-                      defaultValue={userDetails.username}
-                      placeholder="username"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      required
-                    />
-                    <p className="text-sm text-gray-500">
-                      This is your public username. It can only contain letters, numbers, underscores, and hyphens.
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="whatsAppNumber" className="block text-sm font-medium">WhatsApp Number</label>
-                    <input 
-                      id="whatsAppNumber" 
-                      name="whatsAppNumber"
-                      defaultValue={userDetails.whatsAppNumber}
-                      placeholder="+263 123 456 789"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <p className="text-sm text-gray-500">
-                      Your WhatsApp number for contact purposes.
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="city" className="block text-sm font-medium">City</label>
-                    <input 
-                      id="city" 
-                      name="city"
-                      defaultValue={userDetails.city}
-                      placeholder="Harare"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <p className="text-sm text-gray-500">
-                      Your current city of residence.
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="avatar" className="block text-sm font-medium">Profile Picture URL</label>
-                    <input 
-                      id="avatar" 
-                      name="avatar"
-                      defaultValue={userDetails.avatar}
-                      placeholder="https://example.com/avatar.jpg"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <p className="text-sm text-gray-500">
-                      Enter a URL for your profile picture.
-                    </p>
-                  </div>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  Update Profile
-                </button>
-              </form>
-            </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow overflow-hidden md:col-span-2">
-            <div className="p-6 border-b">
-              <h2 className="text-xl font-bold">About {userDetails.name}</h2>
-            </div>
-            <div className="p-6">
-              <div className="text-center space-y-4">
-                <p>You&apos;re viewing {userDetails.name}&apos;s public profile.</p>
-                
-                <div>
-                  <p className="mb-4">Sign in to create your own profile!</p>
-                  <Link 
-                    href="/auth/sign-in"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  <button 
+                    type="submit" 
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
-                    Sign In
-                  </Link>
+                    Update Profile
+                  </button>
+                </form>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="p-6 border-b">
+                <h2 className="text-xl font-bold">About {userDetails.name}</h2>
+              </div>
+              <div className="p-6">
+                <div className="text-center space-y-4">
+                  <p>You&apos;re viewing {userDetails.name}&apos;s public profile.</p>
+                  
+                  <div>
+                    <p className="mb-4">Sign in to create your own profile!</p>
+                    <Link 
+                      href="/auth/sign-in"
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                      Sign In
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </>
+          )}
+        </div>
       </div>
       
       {/* Toggle between own profile and visitor view for demo purposes */}
