@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Banner from "@/components/banner";
 import { validateRequest } from "@/lib/auth/validate-request";
-import { redirect } from "next/navigation";
-import { Paths } from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +20,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const { user } = await validateRequest();
-
-   if (!user) {
-    redirect(Paths.Login);
-  }
 
   return (
     <html
@@ -32,7 +29,17 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <main className="bg-white text-zinc-900">{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Banner />
+          <Header user={user} />
+          <main className="bg-white text-zinc-900">{children}</main>
+          <Footer />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

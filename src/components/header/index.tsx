@@ -10,8 +10,15 @@ import {
 import { Icons } from "../icons";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { User } from "lucia";
+import SignCTA from "./sign-cta";
+import UserToggler from "./user-toggler";
 
-export default function Header() {
+type HeaderProps = {
+  user: User | null;
+}
+
+export default function Header({ user }: HeaderProps) {
   return (
     <header className="bg-background border-b border-zinc-900/10 dark:border-white/10 sticky top-0 z-10">
       <nav
@@ -50,25 +57,14 @@ export default function Header() {
           <Icons.logo className="h-8 w-fit hidden md:block" />
         </Link>
         <div className="flex flex-1 justify-end items-center gap-3 md:gap-4">
-          <Link
-            href="/sign-up"
-            className="text-sm bg-primaryColor hover:bg-primaryColor/80 px-4 py-2 rounded-md text-white"
-          >
-            <span className="hidden md:inline-block">Create Free Account</span>
-            <span className="md:hidden">Create&nbsp;Account</span>
-          </Link>
-          <Link
-            href="/sign-in"
-            className="text-sm leading-6 text-zinc-700 hover:text-zinc-900 dark:text-white/80 dark:hover:text-white group"
-          >
-            Log&nbsp;in&nbsp;
-          </Link>
+          {!user && <SignCTA />}
           <Link
             href="#"
             className="text-zinc-700 hover:text-zinc-900 dark:text-white/80 dark:hover:text-white"
           >
             <Icons.search className="h-6 w-fit -mt-2" />
           </Link>
+          {user && <UserToggler user={user}/>}
         </div>
       </nav>
     </header>
