@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { sendVerificationEmail } from "@/app/(auth)/actions";
 
 const PERSONAL_EMAIL_DOMAINS = [
   "gmail.com",
@@ -60,9 +61,10 @@ export function Phase3({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setEmail(values.email);
     setPhase(4);
+    sendVerificationEmail(values.email);
   }
 
   return (
