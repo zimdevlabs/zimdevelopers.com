@@ -36,6 +36,7 @@ export const signupWithEmailSchema = z.object({
       }
     ),
     speciality: z.string().min(1, "Speciality is required."),
+    code: z.string().min(1, "Code is required."),
 });
 
 export type EmailSignUpInput = z.infer<typeof signupWithEmailSchema>;

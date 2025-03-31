@@ -1,5 +1,8 @@
 import { signup_with_email } from "@/app/(auth)/actions";
+import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { ArrowLeft } from "lucide-react";
 import { Dispatch, SetStateAction, useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -46,6 +49,9 @@ export default function Phase4({
           <h1 className="text-2xl font-semibold tracking-tight text-center">
             Confirm your details
           </h1>
+          <p className="text-xs text-zinc-600">
+              Details can also be changed in the settings
+            </p>
           <form action={formAction}>
             <input type="hidden" value={name} name="name" />
             <input type="hidden" value={email} name="email" />
@@ -63,11 +69,36 @@ export default function Phase4({
                 <div className="text-sm font-semibold">Speciality</div>
                 <div className="text-sm">{speciality}</div>
               </div>
-            </div>
-            <p className="mb-4 text-xs text-zinc-600">
-              Details can also be changed in the settings
+              <p className="text-xs text-zinc-600">
+              Please enter the one-time password sent to your email.
             </p>
-            <div className="grid grid-cols-2 gap-4">
+              <div className="w-full flex justify-center">
+              <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS} required name="code">
+                <InputOTPGroup>
+                  <InputOTPSlot index={0}/>
+                  <InputOTPSlot index={1}/>
+                  <InputOTPSlot index={2}/>
+                  <InputOTPSlot index={3}/>
+                  <InputOTPSlot index={4}/>
+                  <InputOTPSlot index={5}/>
+                </InputOTPGroup>
+              </InputOTP>
+              </div>
+            </div>
+            {state?.fieldError ? (
+              <ul className="list-disc space-y-1 rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
+                {Object.values(state.fieldError).map((err) => (
+                  <li className="ml-4" key={err}>
+                    {err}
+                  </li>
+                ))}
+              </ul>
+            ) : state?.formError ? (
+              <p className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
+                {state?.formError}
+              </p>
+            ) : null}
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <Button
                 variant="outline"
                 type="button"
@@ -76,12 +107,12 @@ export default function Phase4({
                 <ArrowLeft className="size-4 mt-0" />
                 Go back
               </Button>
-              <Button
+              <SubmitButton
                 type="submit"
                 className="w-full bg-primaryColor hover:bg-primaryColor/80"
               >
                 Confirm
-              </Button>
+              </SubmitButton>
             </div>
           </form>
         </div>
