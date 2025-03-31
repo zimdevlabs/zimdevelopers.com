@@ -1,9 +1,22 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-import Image from "next/image";
-import { lucia } from "@/lib/auth";
-import { db } from "@/server/db";
-import { eq } from "drizzle-orm";
+
+// Mock user data
+const mockUser = {
+  id: "user123",
+  name: "John Doe",
+  email: "john@zimdevelopers.com",
+  username: "johndoe",
+  avatar: "https://placekitten.com/200/200",
+  whatsAppNumber: "+263 123 456 789",
+  city: "Harare",
+  speciality: "Frontend Developer",
+  totalPoints: 1250,
+  role: "developer",
+  createdAt: new Date("2023-01-15"),
+  idVerified: true,
+  whatsappNumberVerified: true,
+  profileCompleted: false
+};
 
 // Get name initials for avatar fallback
 function getNameInitials(name: string) {
@@ -26,79 +39,14 @@ function getRoleBadgeColor(role?: string) {
   }
 }
 
-async function getUser() {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get("session");
-  
-  if (!sessionCookie) {
-    return null;
-  }
-  
-  const { session, user } = await lucia.validateSession(sessionCookie.value);
-  
-  // If session expired but a valid cookie is still present, clear cookie
-  if (!session) {
-    const blankCookie = lucia.createBlankSessionCookie();
-    cookieStore.set(
-      blankCookie.name,
-      blankCookie.value,
-      blankCookie.attributes
-    );
-    return null;
-  }
-  
-  return user;
-}
-
-export default async function ProfilePage({ searchParams }: { searchParams: { username?: string } }) {
-  const currentUser = await getUser();
-  
-  // If username is provided in query, show that user's profile
-  // Otherwise, show current user's profile (if logged in)
-  const username = searchParams.username || (currentUser?.username as string);
-  
-  if (!username) {
-    // No username in query and not logged in, show a generic profile page
-    return (
-      <div className="max-w-6xl mx-auto py-8 px-4 text-center">
-        <div className="bg-white rounded-lg shadow p-8">
-          <h1 className="text-2xl font-bold mb-4">Profile Page</h1>
-          <p className="mb-6">Please sign in to view your profile or specify a username in the URL.</p>
-          <Link 
-            href="/auth/sign-in"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Sign In
-          </Link>
-        </div>
-      </div>
-    );
-  }
-  
-  // Find the user by username
-  const userDetails = await db.query.users.findFirst({
-    where: (table) => eq(table.username, username),
-  });
-  
-  if (!userDetails) {
-    return (
-      <div className="max-w-6xl mx-auto py-8 px-4 text-center">
-        <div className="bg-white rounded-lg shadow p-8">
-          <h1 className="text-2xl font-bold mb-4">User Not Found</h1>
-          <p className="mb-6">The user profile you are looking for doesn&apos;t exist.</p>
-          <Link 
-            href="/"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Go Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  // Check if viewing own profile (for edit permissions)
-  const isOwnProfile = currentUser?.id === userDetails.id;
+export default function ProfilePage({ 
+  searchParams 
+}: { 
+  searchParams: { username?: string; viewMode?: string } 
+}) {
+  // This would normally come from authentication
+  const isOwnProfile = searchParams.viewMode !== 'visitor';
+  const userDetails = mockUser;
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4">
@@ -109,12 +57,10 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
           <div className="flex flex-col items-center text-center p-6 border-b">
             <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100">
               {userDetails.avatar ? (
-                <Image 
+                <img 
                   src={userDetails.avatar} 
                   alt={userDetails.name}
-                  className="object-cover"
-                  width={96}
-                  height={96}
+                  className="w-full h-full object-cover"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500 text-xl font-semibold">
@@ -141,7 +87,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span className="text-sm">Member since {new Date(userDetails.createdAt).toLocaleDateString()}</span>
+                <span className="text-sm">Member since {userDetails.createdAt.toLocaleDateString()}</span>
               </div>
               
               {isOwnProfile && userDetails.email && (
@@ -210,16 +156,14 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
             </div>
             
             <div className="p-6">
-              <form action="/api/user/profile" method="POST" className="space-y-6">
-                <input type="hidden" name="_method" value="PATCH" />
-                
+              <form action="#" method="POST" className="space-y-6">
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
                     <input 
                       id="name" 
                       name="name"
-                      defaultValue={userDetails.name || ""}
+                      defaultValue={userDetails.name}
                       placeholder="John Doe"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       required
@@ -234,7 +178,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
                     <input 
                       id="username" 
                       name="username"
-                      defaultValue={userDetails.username || ""}
+                      defaultValue={userDetails.username}
                       placeholder="username"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       required
@@ -249,7 +193,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
                     <input 
                       id="whatsAppNumber" 
                       name="whatsAppNumber"
-                      defaultValue={userDetails.whatsAppNumber || ""}
+                      defaultValue={userDetails.whatsAppNumber}
                       placeholder="+263 123 456 789"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -263,7 +207,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
                     <input 
                       id="city" 
                       name="city"
-                      defaultValue={userDetails.city || ""}
+                      defaultValue={userDetails.city}
                       placeholder="Harare"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -277,7 +221,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
                     <input 
                       id="avatar" 
                       name="avatar"
-                      defaultValue={userDetails.avatar || ""}
+                      defaultValue={userDetails.avatar}
                       placeholder="https://example.com/avatar.jpg"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -305,21 +249,29 @@ export default async function ProfilePage({ searchParams }: { searchParams: { us
               <div className="text-center space-y-4">
                 <p>You&apos;re viewing {userDetails.name}&apos;s public profile.</p>
                 
-                {!currentUser && (
-                  <div>
-                    <p className="mb-4">Sign in to create your own profile!</p>
-                    <Link 
-                      href="/auth/sign-in"
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                      Sign In
-                    </Link>
-                  </div>
-                )}
+                <div>
+                  <p className="mb-4">Sign in to create your own profile!</p>
+                  <Link 
+                    href="/auth/sign-in"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Sign In
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         )}
+      </div>
+      
+      {/* Toggle between own profile and visitor view for demo purposes */}
+      <div className="mt-8 text-center">
+        <Link 
+          href={isOwnProfile ? "?viewMode=visitor" : "?viewMode=owner"} 
+          className="text-blue-600 hover:underline"
+        >
+          {isOwnProfile ? "View as visitor" : "View as profile owner"}
+        </Link>
       </div>
     </div>
   );
