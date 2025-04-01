@@ -15,7 +15,7 @@ const PERSONAL_EMAIL_DOMAINS = [
 ];
 
 export const signupWithEmailSchema = z.object({
-    name: z
+  name: z
     .string()
     .min(1, "Name is required.")
     .refine((value) => {
@@ -33,10 +33,16 @@ export const signupWithEmailSchema = z.object({
       },
       {
         message: "Please use your work email address",
-      }
+      },
     ),
-    speciality: z.string().min(1, "Speciality is required."),
-    code: z.string().min(1, "Code is required."),
+  speciality: z.string().min(1, "Speciality is required."),
+  code: z.string().min(1, "Code is required."),
 });
 
 export type EmailSignUpInput = z.infer<typeof signupWithEmailSchema>;
+
+export const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email."),
+  code: z.string().min(1, "Code is required."),
+});
+export type LoginInput = z.infer<typeof loginSchema>;

@@ -31,8 +31,8 @@ export default function StudioWrapper({ user }: Props) {
     <SidebarProvider>
       <AppSidebar user={user} />
       <SidebarInset>
-        <div className="h-[100vh] flex flex-col overflow-y-clip">
-          <header className="border-b border-zinc-200 flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <div className="flex h-[100vh] flex-col overflow-y-clip">
+          <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-zinc-200 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
@@ -50,7 +50,7 @@ export default function StudioWrapper({ user }: Props) {
             </div>
             <Tabs
               defaultValue="edit"
-              className="pr-4 flex items-center gap-4 text-sm"
+              className="flex items-center gap-4 pr-4 text-sm"
             >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="edit">Edit</TabsTrigger>
@@ -58,8 +58,8 @@ export default function StudioWrapper({ user }: Props) {
               </TabsList>
             </Tabs>
           </header>
-          <div className="h-full relative">
-            <div className="max-w-[800px] mx-auto w-full border-x border-zinc-200 relative h-full max-h-[calc(100vh-135px)] overflow-y-auto">
+          <div className="relative h-full">
+            <div className="relative mx-auto h-full max-h-[calc(100vh-135px)] w-full max-w-[800px] overflow-y-auto border-x border-zinc-200">
               {/* <div className="border-b border-zinc-200 bg-white sticky top-0">
                 Header
               </div> */}
@@ -68,7 +68,7 @@ export default function StudioWrapper({ user }: Props) {
                   rows={1}
                   name="commentText"
                   id="commentText"
-                  className="block w-full placeholder:text-sm resize-none border-0 bg-transparent py-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  className="block w-full resize-none border-0 bg-transparent py-2 text-gray-900 placeholder:text-sm placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   placeholder="Start writing..."
                   minLength={2}
                   maxLength={500}
@@ -83,10 +83,10 @@ export default function StudioWrapper({ user }: Props) {
                 />
               </div>
             </div>
-            <footer className="sticky bottom-0 top-full border-t border-zinc-200 flex items-center justify-between py-4 bg-white px-4 md:px-8">
+            <footer className="sticky bottom-0 top-full flex items-center justify-between border-t border-zinc-200 bg-white px-4 py-4 md:px-8">
               <div className="text-sm text-zinc-600">Edited 2 hours ago</div>
               <div>
-                <Button className="bg-primaryColor">Publish</Button>
+                <Button className="bg-primaryColor">Download</Button>
               </div>
             </footer>
           </div>

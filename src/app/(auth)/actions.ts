@@ -1,7 +1,12 @@
 "use server";
 
 import { db } from "@/server/db";
-import { EmailSignUpInput, signupWithEmailSchema } from "./validators";
+import {
+  EmailSignUpInput,
+  LoginInput,
+  loginSchema,
+  signupWithEmailSchema,
+} from "./validators";
 import { isWithinExpirationDate } from "lucia/dist/date";
 import { emailVerificationCodes, users } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
@@ -22,12 +27,83 @@ export interface ActionResponse<T> {
   done?: boolean;
 }
 
-export async function signup_with_email(_: any,
-  formData: FormData): Promise<ActionResponse<EmailSignUpInput>> {
+export async function login_with_email(
+  _: any,
+  formData: FormData,
+): Promise<ActionResponse<LoginInput>> {
+  const obj = Object.fromEntries(formData.entries());
+
+  const parsed = loginSchema.safeParse(obj);
+  if (!parsed.success) {
+    const err = parsed.error.flatten();
+    return {
+      fieldError: {
+        email: err.fieldErrors.email?.[0],
+        code: err.fieldErrors.code?.[0],
+      },
+    };
+  }
+
+  const { email, code } = parsed.data;
+
+  const existingUser = await db.query.users.findFirst({
+    where: (table, { eq }) => eq(table.email, email),
+  });
+
+  const otpCode = await db.query.emailVerificationCodes.findFirst({
+    where: (table, { eq, and }) =>
+      and(eq(table.code, code), eq(table.email, email)),
+  });
+
+  if (!otpCode || otpCode.code !== code) {
+    return {
+      formError: "Incorrect email or otp",
+    };
+  }
+
+  if (!existingUser) {
+    await db
+      .delete(emailVerificationCodes)
+      .where(eq(emailVerificationCodes.id, otpCode.id));
+
+    return {
+      formError: "User not found create an account",
+    };
+  }
+
+  if (!isWithinExpirationDate(otpCode.expiresAt)) {
+    return { formError: "Verification code expired" };
+  }
+
+  if (otpCode.email !== email) {
+    return { formError: "Email does not match" };
+  }
+
+  await db
+    .delete(emailVerificationCodes)
+    .where(eq(emailVerificationCodes.id, otpCode.id));
+
+  const session = await lucia.createSession(existingUser.id, {});
+  const sessionCookie = lucia.createSessionCookie(session.id);
+  (await cookies()).set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes,
+  );
+
+  const callbackUrl = formData.get("callbackUrl") as string;
+
+  return redirect(callbackUrl || Paths.Home);
+}
+
+export async function signup_with_email(
+  _: any,
+  formData: FormData,
+): Promise<ActionResponse<EmailSignUpInput>> {
   const obj = Object.fromEntries(formData.entries());
 
   const parsed = signupWithEmailSchema.safeParse(obj);
-  
+
   if (!parsed.success) {
     const err = parsed.error.flatten();
     return {
@@ -42,7 +118,7 @@ export async function signup_with_email(_: any,
 
   const { email, code, speciality, name } = parsed.data;
 
-   const existingUser = await db.query.users.findFirst({
+  const existingUser = await db.query.users.findFirst({
     where: (table, { eq }) => eq(table.email, email),
     columns: { email: true },
   });
@@ -61,18 +137,18 @@ export async function signup_with_email(_: any,
     return { formError: "Invalid verification code" };
   }
 
-   if (!isWithinExpirationDate(dbCode.expiresAt)) {
+  if (!isWithinExpirationDate(dbCode.expiresAt)) {
     return { formError: "Verification code expired" };
   }
 
-   if (dbCode.email !== email) {
+  if (dbCode.email !== email) {
     return { formError: "Email does not match" };
   }
 
   await db
     .delete(emailVerificationCodes)
     .where(eq(emailVerificationCodes.id, dbCode.id));
-    
+
   const userId = generateId(21);
   const userName = generateId(8);
 
@@ -90,11 +166,11 @@ export async function signup_with_email(_: any,
   (await cookies()).set(
     sessionCookie.name,
     sessionCookie.value,
-    sessionCookie.attributes
+    sessionCookie.attributes,
   );
 
-  return redirect(Paths.Dashboard)
-  
+  return redirect(Paths.Dashboard);
+
   // try {
   //   console.log(email);
   //   return { done: true, successMessage: "Account created successfully" };
@@ -113,7 +189,9 @@ const timeFromNow = (time: Date) => {
 };
 
 async function generateEmailVerificationCode(email: string): Promise<string> {
-  await db.delete(emailVerificationCodes).where(eq(emailVerificationCodes.email, email));
+  await db
+    .delete(emailVerificationCodes)
+    .where(eq(emailVerificationCodes.email, email));
   const code = generateRandomString(6, alphabet("0-9")); // 6 digit code
   await db.insert(emailVerificationCodes).values({
     email,
@@ -122,8 +200,6 @@ async function generateEmailVerificationCode(email: string): Promise<string> {
   });
   return code;
 }
-
-
 
 export async function sendVerificationEmail(email: string): Promise<{
   error?: string;
@@ -145,7 +221,7 @@ export async function sendVerificationEmail(email: string): Promise<{
     code: verificationCode,
   });
 
-   return { success: true };
+  return { success: true };
 }
 
 export async function logout(): Promise<{ error: string } | void> {
@@ -160,7 +236,7 @@ export async function logout(): Promise<{ error: string } | void> {
   (await cookies()).set(
     sessionCookie.name,
     sessionCookie.value,
-    sessionCookie.attributes
+    sessionCookie.attributes,
   );
   return redirect("/");
 }
