@@ -1,7 +1,7 @@
 "use client";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ChevronRight } from "lucide-react";
 
 export default function Phase2({
@@ -9,19 +9,9 @@ export default function Phase2({
 }: {
   setPhase: Dispatch<SetStateAction<number>>;
 }) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  function onButtonClick() {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setPhase(4);
-    }, 5000);
-  }
-
   return (
     <div className="p-8">
-      <div className="mx-auto h-[500px] md:h-fit flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div className="mx-auto flex h-[500px] w-full flex-col justify-center space-y-6 sm:w-[350px] md:h-fit">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
             Connect your account
@@ -32,37 +22,33 @@ export default function Phase2({
             <Button
               variant="outline"
               type="button"
-              disabled={isLoading}
-              onClick={onButtonClick}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/sign-in/github";
+              }}
             >
-              {isLoading ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.gitHub className="mr-2 h-4 w-4" />
-              )}{" "}
+              <Icons.gitHub className="mr-2 h-4 w-4" />
               GitHub
             </Button>
             <Button
               variant="outline"
               type="button"
-              disabled={isLoading}
-              onClick={onButtonClick}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/sign-in/google";
+              }}
             >
-              {isLoading ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.google className="mr-2 h-4 w-4" />
-              )}{" "}
+              <Icons.google className="mr-2 h-4 w-4" />
               Google
             </Button>
           </div>
           <Button
             variant={"ghost"}
-            className="text-primaryColor font-normal text-sm"
+            className="text-sm font-normal text-primaryColor"
             onClick={() => setPhase(3)}
           >
             Use Work Email
-            <ChevronRight className="size-4 mt-0" />
+            <ChevronRight className="mt-0 size-4" />
           </Button>
         </div>
       </div>

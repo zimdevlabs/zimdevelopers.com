@@ -76,7 +76,15 @@ export function UserAuthForm({
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <Button variant="outline" type="button" disabled={isLoading}>
+          <Button
+            variant="outline"
+            type="button"
+            disabled={isLoading}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/sign-in/github";
+            }}
+          >
             {isLoading ? (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
@@ -84,7 +92,15 @@ export function UserAuthForm({
             )}{" "}
             GitHub
           </Button>
-          <Button variant="outline" type="button" disabled={isLoading}>
+          <Button
+            variant="outline"
+            type="button"
+            disabled={isLoading}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/sign-in/google";
+            }}
+          >
             {isLoading ? (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
