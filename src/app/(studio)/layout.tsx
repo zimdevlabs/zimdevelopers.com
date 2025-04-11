@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { validateRequest } from "@/lib/auth/validate-request";
-import { redirect } from "next/navigation";
-import { Paths } from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,18 +10,11 @@ export const metadata: Metadata = {
   description: "A feature rich developer community",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const { user } = await validateRequest();
-
-   if (!user) {
-    redirect(Paths.Login);
-  }
-
   return (
     <html
       lang="en"

@@ -3,7 +3,6 @@
 import * as React from "react";
 import { NavProjects } from "./nav-projects";
 import { NavUser } from "./nav-user";
-import { TeamSwitcher } from "./team-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -11,17 +10,17 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { UserType } from "@/demo/data";
+import { User } from "lucia";
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: UserType;
+  user: User;
 }
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher user={user} />
+      <SidebarHeader className="sr-only">
+        <span>SideBar</span>
       </SidebarHeader>
       <SidebarContent>
         <NavProjects />

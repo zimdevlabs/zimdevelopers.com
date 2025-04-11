@@ -9,6 +9,8 @@ import Banner from "@/components/banner";
 import { validateRequest } from "@/lib/auth/validate-request";
 import { redirect } from "next/navigation";
 import { Paths } from "@/lib/constants";
+import UserHero from "@/components/user/hero";
+import UserNav from "@/components/user/user-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +44,8 @@ export default async function RootLayout({
         >
           <Banner />
           <Header user={user} />
+          <UserHero user={user} />
+          <UserNav username={user.username!} />
           <main className="bg-white text-zinc-900">{children}</main>
           <Footer />
         </ThemeProvider>

@@ -17,11 +17,11 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserType } from "@/demo/data";
+import { User } from "lucia";
 import { useState } from "react";
 
 type Props = {
-  user: UserType;
+  user: User;
 };
 
 export default function StudioWrapper({ user }: Props) {
