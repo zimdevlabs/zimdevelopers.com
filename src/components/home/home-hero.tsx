@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function HomeHero() {
   return (
@@ -15,15 +16,18 @@ export default function HomeHero() {
               hiring.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <Link
                 href="/sign-up"
                 className="rounded-md bg-primaryColor px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryColor/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
               >
                 Create free account
-              </a>
-              <a href="/blog" className="text-sm/6 font-semibold text-zinc-700">
+              </Link>
+              <Link
+                href="/blog"
+                className="text-sm/6 font-semibold text-zinc-700"
+              >
                 Explore blog <ArrowRight className="inline size-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

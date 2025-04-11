@@ -2,6 +2,7 @@ import { SVGProps } from "react";
 import { JSX } from "react/jsx-runtime";
 import { ModeToggle } from "./theme-toggler";
 import { Icons } from "../icons";
+import Link from "next/link";
 
 const navigation = {
   solutions: [
@@ -94,7 +95,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-background border-t border-zinc-900/10 dark:border-white/10">
+    <footer className="border-t border-zinc-900/10 bg-background dark:border-white/10">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="flex flex-col items-center gap-y-6">
           <Icons.logo className="h-10 w-fit" />
@@ -103,18 +104,18 @@ export default function Footer() {
           </p>
           <div className="flex gap-x-6">
             {navigation.social.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className="text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon aria-hidden="true" className="size-6" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
-        <div className="mt-16 border-t border-zinc-900/10 dark:border-white/10 pt-8 sm:mt-20 lg:mt-24 flex justify-between">
+        <div className="mt-16 flex justify-between border-t border-zinc-900/10 pt-8 dark:border-white/10 sm:mt-20 lg:mt-24">
           <p className="text-sm/6 text-zinc-600 dark:text-zinc-400">
             &copy; 2025 Zim Developers Labs. All rights reserved.
           </p>

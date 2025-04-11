@@ -78,60 +78,60 @@ export function NavProjects() {
                   has you covered.
                 </DialogDescription>
               </DialogHeader>
-              <div className="w-full bg-zinc-50  h-[calc(100vh-200px)] rounded-md px-4 py-6 overflow-y-auto">
-                <h2 className="text-xl font-semibold mb-4">
+              <div className="h-[calc(100vh-200px)] w-full overflow-y-auto rounded-md bg-zinc-50 px-4 py-6">
+                <h2 className="mb-4 text-xl font-semibold">
                   Markdown Syntax Guide
                 </h2>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Headers</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Headers</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Emphasis</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Emphasis</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     *italic* or _italic_ **bold** or __bold__ ***bold italic***
                     or ___bold italic___
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Lists</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Lists</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     Unordered: - Item 1 - Item 2 - Subitem 2.1 - Subitem 2.2
                     Ordered: 1. First item 2. Second item 3. Third item
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Links</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Links</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     [Link text](https://www.example.com) [Link with
                     title](https://www.example.com &quot;Title text&quot;)
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Images</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Images</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     ![Alt text](image-url.jpg) ![Alt text](image-url.jpg
                     &quot;Optional title&quot;)
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Blockquotes</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Blockquotes</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     &gt; This is a blockquote &gt; It can span multiple lines
                   </pre>
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Code</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Code</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     Inline code: `code` Code block: ``` function example() {"{"}
                     console.log(&quot;Hello, world!&quot;);
                     {"}"}
@@ -140,13 +140,13 @@ export function NavProjects() {
                 </section>
 
                 <section className="mb-6">
-                  <h3 className="text-lg mb-2">Horizontal Rule</h3>
-                  <pre className="bg-white p-2 rounded border overflow-x-hidden">
+                  <h3 className="mb-2 text-lg">Horizontal Rule</h3>
+                  <pre className="overflow-x-hidden rounded border bg-white p-2">
                     --- or *** or ___
                   </pre>
                 </section>
 
-                <p className="text-sm text-gray-600 mt-4">
+                <p className="mt-4 text-sm text-gray-600">
                   NB, you can contribute to the Markdown processor to add more
                   variations in syntax support. Always refer to the specific
                   documentation before making a pull request.
@@ -185,10 +185,10 @@ export function NavProjects() {
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
+              <Link href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
