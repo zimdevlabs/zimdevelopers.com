@@ -34,17 +34,18 @@ export const EmailVerificationTemplate = ({
                 src={`https://www.zimdevelopers.com/static.png`}
                 width="176"
                 height="45"
-                alt="IB's Logo"
+                alt="Zim Developers Logo"
                 style={{ margin: "0 auto" }}
               />
             </Section>
             <Section style={upperSection}>
               <Heading style={h1}>Verify your email address</Heading>
               <Text style={mainText}>
-                Thanks for starting the new IB account creation process. We want
-                to make sure it&#39;s really you. Please enter the following
-                verification code when prompted. If you don&apos;t want to
-                create an account, you can ignore this message.
+                Thanks for starting the new Zim Developers Community account
+                creation process. We want to make sure it&#39;s really you.
+                Please enter the following verification code when prompted. If
+                you don&apos;t want to create an account, you can ignore this
+                message.
               </Text>
               <Section style={verificationSection}>
                 <Text style={verifyText}>Verification code</Text>
@@ -58,18 +59,19 @@ export const EmailVerificationTemplate = ({
             <Hr />
             <Section style={lowerSection}>
               <Text style={cautionText}>
-                IB will never email you and ask you to disclose or verify your
-                password, credit card, or banking account number.
+                ZimDevLabs will never email you and ask you to disclose or
+                verify your password, credit card, or banking account number.
               </Text>
             </Section>
           </Section>
           <Text style={footerText}>
-            This message was produced and distributed by IB Global. © 2024,
-            IBGlobal, Inc. All rights reserved. IB is a registered trademark of{" "}
+            This message was produced and distributed by ZimDevLabs. © 2025,
+            IBGlobal, Inc. All rights reserved. ZimDevLabs is a registered
+            trademark of{" "}
             <Link href="https://www.ibglobal.org" target="_blank" style={link}>
-              IB Global
+              Xfinity Pros
             </Link>
-            , Inc. View our{" "}
+            , Zimbabwe. View our{" "}
             <Link
               href="https://www.ibglobal.org/policies/privacy"
               target="_blank"

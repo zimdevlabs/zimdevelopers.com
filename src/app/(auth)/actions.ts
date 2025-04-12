@@ -125,7 +125,7 @@ export async function signup_with_email(
 
   if (existingUser) {
     return {
-      formError: "Cannot create account with that email",
+      formError: "User with that email already exists. Login instead",
     };
   }
 
