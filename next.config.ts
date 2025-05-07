@@ -12,6 +12,15 @@ const getConfig = () => {
         { hostname: "ewxtfugdovg4wwyt.public.blob.vercel-storage.com" },
       ],
     },
+    async redirects() {
+      return [
+        {
+          source: "/join-group",
+          destination: "https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX",
+          permanent: false, // Uses 307 status code (temporary redirect)
+        },
+      ];
+    },
   } as NextConfig;
 };
 
