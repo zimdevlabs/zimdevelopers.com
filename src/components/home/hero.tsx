@@ -4,6 +4,7 @@ import { Navbar } from "../navbar";
 import { Link } from "../navbar/link";
 import { Button } from "../ui/button";
 import { Gradient } from "./gradient";
+import PortfolioCarousel from "../portfolio-carousel";
 
 export default function HomeHero() {
   return (
@@ -21,7 +22,7 @@ export default function HomeHero() {
             </Link>
           }
         />
-        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
+        <div className="pt-16 sm:pt-24 md:pt-32 md:pb-48">
           <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-7xl/[0.8] md:text-8xl/[0.8]">
             Close every deal.
           </h1>
@@ -34,6 +35,9 @@ export default function HomeHero() {
               Get Hired
             </Button>
           </div>
+        </div>
+        <div className="md:absolute bottom-0 md:inset-80 md:translate-x-80">
+          <PortfolioCarousel />
         </div>
       </Container>
     </div>
