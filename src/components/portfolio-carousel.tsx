@@ -111,7 +111,7 @@ export default function PortfolioCarousel() {
             </div>
             <div>
               <h3 className="text-xl font-bold">{portfolioItems[activeIndex].person.name}</h3>
-              <p className="text-gray-600 text-center">{portfolioItems[activeIndex].person.title}</p>
+              <p className="text-zinc-600 text-center">{portfolioItems[activeIndex].person.title}</p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ export default function PortfolioCarousel() {
               <button
                 key={`indicator-${index}`}
                 onClick={() => goToItem(index)}
-                className="relative h-2 rounded-full bg-gray-200 overflow-hidden"
+                className="relative h-2 rounded-full bg-zinc-200 overflow-hidden"
                 style={{ width: index === activeIndex ? "60px" : "12px" }}
               >
                 {index === activeIndex && (

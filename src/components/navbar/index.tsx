@@ -25,7 +25,7 @@ function DesktopNav() {
         <PlusGridItem key={label} className="relative flex">
           <Link
             href={href}
-            className={`flex items-center px-4 py-3 text-base text-gray-950 bg-blend-multiply  ${isPrimary ? 'bg-black text-white data-hover:bg-black/80' : 'data-hover:bg-black/[2.5%]'}`}
+            className={`flex items-center px-4 py-3 text-base bg-blend-multiply  ${isPrimary ? 'bg-black text-white data-hover:bg-black/80' : 'data-hover:bg-black/[2.5%] text-zinc-950'}`}
           >
             {label}
           </Link>
@@ -61,7 +61,7 @@ function MobileNav() {
             }}
             key={href}
           >
-            <Link href={href} className="text-base font-medium text-gray-950">
+            <Link href={href} className="text-base font-medium text-zinc-950">
               {label}
             </Link>
           </motion.div>

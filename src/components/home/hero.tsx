@@ -8,7 +8,7 @@ import PortfolioCarousel from "../portfolio-carousel";
 
 export default function HomeHero() {
   return (
-    <div className="relative">
+    <div className="relative mb-48">
       <Gradient className="absolute inset-2 bottom-0 top-0 right-0 left-0" />
       <Container className="relative">
         <Navbar
@@ -23,10 +23,10 @@ export default function HomeHero() {
           }
         />
         <div className="pt-16 sm:pt-24 md:pt-32 md:pb-48">
-          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-7xl/[0.8] md:text-8xl/[0.8]">
+          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-zinc-950 sm:text-7xl/[0.8] md:text-8xl/[0.8]">
             Close every deal.
           </h1>
-          <p className="mt-8 max-w-lg text-xl/7 text-gray-950/75 sm:text-2xl/8">
+          <p className="mt-8 max-w-lg text-xl/7 text-zinc-950/75 sm:text-2xl/8">
             Zim Developers is a community platform of creatives, connecting you with the talent and tools to get work underway.
           </p>
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
