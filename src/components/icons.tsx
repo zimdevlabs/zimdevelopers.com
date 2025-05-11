@@ -22,6 +22,7 @@ const LogoIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+
 export const Icons = {
   logoIcon: LogoIcon,
   instagramIcon:  (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
