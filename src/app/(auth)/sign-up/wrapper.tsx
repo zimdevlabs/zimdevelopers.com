@@ -7,21 +7,24 @@ import { Icons } from "@/components/icons";
 import { LogIn } from "lucide-react";
 import SignUpPageForm from "./form";
 
-export default function SignUpPageWrapper() {
-
+export default function SignUpPageWrapper({
+  callbackUrl,
+}: {
+  callbackUrl?: string;
+}) {
   return (
-    <div className="container relative flex flex-col-reverse items-center justify-center md:grid md:h-screen lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="relative container flex flex-col-reverse items-center justify-center md:grid md:h-screen lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
         href="/sign-in"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "absolute right-4 top-4 md:right-8 md:top-8",
+          "absolute top-4 right-4 md:top-8 md:right-8",
         )}
       >
         Login Instead
         <LogIn />
       </Link>
-      <div className="relative h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+      <div className="bg-muted relative h-full flex-col p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 mb-4 flex items-center text-lg font-medium md:mb-0">
           <Icons.logoIcon className="mr-2 h-8 w-8" />
@@ -38,7 +41,7 @@ export default function SignUpPageWrapper() {
           </blockquote>
         </div>
       </div>
-      <SignUpPageForm />
+      <SignUpPageForm callbackUrl={callbackUrl} />
     </div>
   );
 }

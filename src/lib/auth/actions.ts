@@ -121,15 +121,12 @@ export async function signup(
   const hashedPassword = await new Scrypt().hash(password);
   const userName = generateId(8);
 
-  const country = String(formData.get("country"));
-
   await db.insert(users).values({
     id: userId,
     fullName: name,
     email,
     hashedPassword,
     username: `zimdev-${userName}`,
-    country,
   });
 
   const verificationCode = await generateEmailVerificationCode(userId, email);
