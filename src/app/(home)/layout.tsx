@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "@/components/footer";
+import { validateRequest } from "@/lib/auth/validate-request";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,16 +12,18 @@ export const metadata: Metadata = {
   description: "An open-source community for developers in Zimbabwe.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { user } = await validateRequest();
+
   return (
     <html lang="en">
       <body className={`${inter.className} h-full antialiased`}>
         {children}
-        <Footer />
+        <Footer user={user} />
         <Analytics />
       </body>
     </html>

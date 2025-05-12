@@ -9,6 +9,7 @@ import { db } from "@/server/db";
 import { Paths } from "@/lib/constants";
 import { users } from "@/server/db/schema";
 import { NextRequest } from "next/server";
+import { convertToSlug } from "@/lib/utils";
 
 interface GitHubUser {
   id: number;
@@ -117,7 +118,8 @@ async function createOrUpdateUser(
 
   if (!existingUser) {
     const userId = generateId(21);
-    const userName = generateId(8);
+    const usernameSuffix = generateId(8);
+    const nameSlug = convertToSlug(githubUser.name || githubUser.login);
 
     await db.insert(users).values({
       id: userId,
@@ -126,7 +128,7 @@ async function createOrUpdateUser(
       githubId: githubUser.id.toString(),
       avatar: githubUser.avatar_url,
       fullName: githubUser.name || githubUser.login,
-      username: `zimdev-${userName}`,
+      username: `${nameSlug}-${usernameSuffix}`,
     });
     return userId;
   }

@@ -7,6 +7,7 @@ import { db } from "@/server/db";
 import { Paths } from "@/lib/constants";
 import { users } from "@/server/db/schema";
 import { NextRequest } from "next/server";
+import { convertToSlug } from "@/lib/utils";
 
 interface GoogleUser {
   id: string;
@@ -93,7 +94,8 @@ async function createOrUpdateUser(googleUser: GoogleUser): Promise<string> {
 
   if (!existingUser) {
     const userId = generateId(21);
-    const userName = generateId(8);
+    const usernameSuffix = generateId(8);
+    const nameSlug = convertToSlug(googleUser.name);
 
     await db.insert(users).values({
       id: userId,
@@ -102,7 +104,7 @@ async function createOrUpdateUser(googleUser: GoogleUser): Promise<string> {
       googleId: googleUser.id,
       avatar: googleUser.picture,
       fullName: googleUser.name,
-      username: `zimdev-${userName}`,
+      username: `${nameSlug}-${usernameSuffix}`,
     });
     return userId;
   }

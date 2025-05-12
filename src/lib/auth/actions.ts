@@ -26,6 +26,7 @@ import { sendMail, EmailTemplate } from "@/lib/email";
 import { validateRequest } from "@/lib/auth/validate-request";
 import { Paths } from "../constants";
 import { env } from "@/env";
+import { convertToSlug } from "../utils";
 
 export interface ActionResponse<T> {
   fieldError?: Partial<Record<keyof T, string | undefined>>;
@@ -119,14 +120,16 @@ export async function signup(
 
   const userId = generateId(21);
   const hashedPassword = await new Scrypt().hash(password);
-  const userName = generateId(8);
+  const usernameSuffix = generateId(8);
+
+  const nameSlug = convertToSlug(name);
 
   await db.insert(users).values({
     id: userId,
     fullName: name,
     email,
     hashedPassword,
-    username: `zimdev-${userName}`,
+    username: `${nameSlug}-${usernameSuffix}`,
   });
 
   const verificationCode = await generateEmailVerificationCode(userId, email);

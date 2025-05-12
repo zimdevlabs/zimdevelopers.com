@@ -30,7 +30,7 @@ export default async function RootLayout({
           <Navbar user={user || undefined} />
         </Container>
         {children}
-        <Footer />
+        <Footer user={user} />
         <Analytics />
       </body>
     </html>

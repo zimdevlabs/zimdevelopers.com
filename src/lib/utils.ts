@@ -1,6 +1,7 @@
 import { env } from "@/env";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import slugify from "slugify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,3 +32,14 @@ export const truncateOnWord = (
 
   return truncatedText;
 };
+
+export function convertToSlug(
+  text?: string,
+  { fallback }: { fallback?: string } = { fallback: "top-level" },
+) {
+  if (!text) return fallback;
+  return slugify(text.trim(), {
+    lower: true,
+    remove: /[^a-zA-Z0-9 ]/g,
+  });
+}

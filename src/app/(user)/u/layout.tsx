@@ -28,7 +28,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} h-full antialiased`}>
         {children}
-        <Footer />
+        <Footer user={user} />
         <Analytics />
       </body>
     </html>
