@@ -124,7 +124,7 @@ export default function SignUpPageForm({
               </svg>
               <span className="text-sm/6 font-semibold">Use Google</span>
             </Link>
-            <Link
+            {/* <Link
               href="/sign-in"
               onClick={(e) => {
                 e.preventDefault();
@@ -148,7 +148,7 @@ export default function SignUpPageForm({
                 />
               </svg>
               <span className="text-sm/6 font-semibold">Use GitHub</span>
-            </Link>
+            </Link> */}
 
             <button
               onClick={() => setShowEmail((prev) => !prev)}

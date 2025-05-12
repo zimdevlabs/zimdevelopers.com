@@ -1,4 +1,4 @@
-// auth/sign-in/github/callback/route.ts
+// sign-in/github/callback/route.ts
 
 import { cookies } from "next/headers";
 import { generateId } from "lucia";
@@ -59,7 +59,9 @@ async function getGitHubUserData(
       headers: { Authorization: `Bearer ${accessToken}` },
     }),
     fetch("https://api.github.com/user/emails", {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     }),
   ]);
 

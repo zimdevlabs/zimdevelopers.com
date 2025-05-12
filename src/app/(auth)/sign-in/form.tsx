@@ -93,7 +93,7 @@ export default function SignInPageForm({
             </svg>
             <span className="text-sm/6 font-semibold">Google</span>
           </Link>
-          <Link
+          {/* <Link
             href="/sign-in"
             onClick={(e) => {
               e.preventDefault();
@@ -117,7 +117,7 @@ export default function SignInPageForm({
               />
             </svg>
             <span className="text-sm/6 font-semibold">GitHub</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
 
