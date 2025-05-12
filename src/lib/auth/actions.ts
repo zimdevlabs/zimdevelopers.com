@@ -249,7 +249,7 @@ export async function verifyEmail(
   );
 
   const callbackUrl = formData.get("callbackUrl") as string;
-  redirect(callbackUrl ? callbackUrl : `/${user.username}`);
+  redirect(callbackUrl ? callbackUrl : `/u/${user.username}`);
 }
 
 export async function sendPasswordResetLink(
@@ -330,7 +330,7 @@ export async function resetPassword(
 
   const { user } = await validateRequest();
 
-  redirect(user ? `/${user.username}` : Paths.Home);
+  redirect(user ? `/u/${user.username}` : Paths.Home);
 }
 
 const timeFromNow = (time: Date) => {

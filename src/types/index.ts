@@ -14,3 +14,7 @@ export type siteConfigType = {
     banner: string;
   };
 };
+
+export type GuestUserType = {
+  username: string;
+};

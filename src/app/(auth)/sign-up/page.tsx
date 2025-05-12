@@ -21,7 +21,7 @@ export default async function SignUpPage({
 
   const { user } = await validateRequest();
 
-  if (user) redirect(callbackUrl || `/${user.username}`);
+  if (user) redirect(callbackUrl || `/u/${user.username}`);
 
   return <SignUpPageWrapper callbackUrl={callbackUrl} />;
 }
