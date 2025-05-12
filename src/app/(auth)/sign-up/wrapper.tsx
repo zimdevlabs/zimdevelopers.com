@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { LogIn } from "lucide-react";
+import SignUpPageForm from "./form";
 
 export default function SignUpPageWrapper() {
 
@@ -37,7 +38,7 @@ export default function SignUpPageWrapper() {
           </blockquote>
         </div>
       </div>
-      {/* Form Here */}
+      <SignUpPageForm />
     </div>
   );
 }

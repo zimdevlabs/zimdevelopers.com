@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { LogIn } from "lucide-react";
+import SignInPageForm from "./form";
 
 export default function SignInPageWrapper() {
  
@@ -21,7 +22,7 @@ export default function SignInPageWrapper() {
         <LogIn />
       </Link>
       <div className="p-8">
-        {/* Content Here */}
+        <SignInPageForm />
       </div>
       <div className="relative h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className="absolute inset-0 bg-zinc-900" />
