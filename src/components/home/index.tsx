@@ -1,9 +1,10 @@
-import HomeHero from "./hero"
+import { User } from "lucia";
+import HomeHero from "./hero";
 
-export default function HomeLayout() {
+export default function HomeLayout({ user }: { user?: User }) {
   return (
     <main>
-      <HomeHero />
+      <HomeHero user={user} />
     </main>
-  )
+  );
 }

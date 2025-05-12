@@ -81,7 +81,7 @@ export async function login(
 
   const callbackUrl = formData.get("callbackUrl") as string;
 
-  return redirect(callbackUrl || `/${existingUser.username}`);
+  return redirect(callbackUrl || `/u/${existingUser.username}`);
 }
 
 export async function signup(

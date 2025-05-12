@@ -1,38 +1,61 @@
-'use client'
+"use client";
 
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-} from '@headlessui/react'
-import { Bars2Icon } from '@heroicons/react/24/solid'
-import { motion } from 'framer-motion'
-import { Link } from './link'
-import { Logo } from './logo'
-import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
+} from "@headlessui/react";
+import { Bars2Icon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+import { Link } from "./link";
+import { Logo } from "./logo";
+import { PlusGrid, PlusGridItem, PlusGridRow } from "./plus-grid";
+import { User } from "lucia";
+import UserToggler from "./user-toggler";
 
 const links = [
-  { href: '#', label: 'For Developers' },
-  { href: '#', label: 'For Employers' },
-  { href: '/sign-up', label: 'Sign Up', isPrimary: true },
-  { href: '/sign-in', label: 'Log in' },
-]
+  { href: "#", label: "For Developers" },
+  { href: "#", label: "For Employers" },
+];
 
-function DesktopNav() {
+const signLinks = [
+  { href: "/sign-up", label: "Sign Up", isPrimary: true },
+  { href: "/sign-in", label: "Log in" },
+];
+
+function DesktopNav({ user }: { user?: User }) {
   return (
     <nav className="relative hidden lg:flex">
-      {links.map(({ href, label, isPrimary }) => (
+      {links.map(({ href, label }) => (
         <PlusGridItem key={label} className="relative flex">
           <Link
             href={href}
-            className={`flex items-center px-4 py-3 text-base bg-blend-multiply  ${isPrimary ? 'bg-black text-white data-hover:bg-black/80' : 'data-hover:bg-black/[2.5%] text-zinc-950'}`}
+            className={`flex items-center px-4 py-3 text-base text-zinc-950 bg-blend-multiply data-hover:bg-black/[2.5%]`}
           >
             {label}
           </Link>
         </PlusGridItem>
       ))}
+      {!user &&
+        signLinks.map(({ href, label, isPrimary }) => (
+          <PlusGridItem key={label} className="relative flex">
+            <Link
+              href={href}
+              className={`flex items-center px-4 py-3 text-base bg-blend-multiply ${isPrimary ? "bg-black text-white data-hover:bg-black/80" : "text-zinc-950 data-hover:bg-black/[2.5%]"}`}
+            >
+              {label}
+            </Link>
+          </PlusGridItem>
+        ))}
+      {user && (
+        <PlusGridItem className="relative flex">
+          <div className="flex items-center px-4 py-3 text-base text-zinc-950 bg-blend-multiply data-hover:bg-black/[2.5%]">
+            <UserToggler user={user} />
+          </div>
+        </PlusGridItem>
+      )}
     </nav>
-  )
+  );
 }
 
 function MobileNavButton() {
@@ -43,7 +66,7 @@ function MobileNavButton() {
     >
       <Bars2Icon className="size-6" />
     </DisclosureButton>
-  )
+  );
 }
 
 function MobileNav() {
@@ -56,7 +79,7 @@ function MobileNav() {
             animate={{ opacity: 1, rotateX: 0 }}
             transition={{
               duration: 0.15,
-              ease: 'easeInOut',
+              ease: "easeInOut",
               rotateX: { duration: 0.3, delay: linkIndex * 0.1 },
             }}
             key={href}
@@ -72,10 +95,16 @@ function MobileNav() {
         <div className="absolute inset-x-0 top-2 border-t border-black/5" />
       </div>
     </DisclosurePanel>
-  )
+  );
 }
 
-export function Navbar({ banner }: { banner?: React.ReactNode }) {
+export function Navbar({
+  banner,
+  user,
+}: {
+  banner?: React.ReactNode;
+  user?: User;
+}) {
   return (
     <Disclosure as="header" className="pt-12 sm:pt-16">
       <PlusGrid>
@@ -92,11 +121,11 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
               </div>
             )}
           </div>
-          <DesktopNav />
+          <DesktopNav user={user} />
           <MobileNavButton />
         </PlusGridRow>
       </PlusGrid>
       <MobileNav />
     </Disclosure>
-  )
+  );
 }

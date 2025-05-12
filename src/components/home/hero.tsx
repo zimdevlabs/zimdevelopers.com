@@ -5,13 +5,15 @@ import { Link } from "../navbar/link";
 import { Button } from "../ui/button";
 import { Gradient } from "./gradient";
 import PortfolioCarousel from "../portfolio-carousel";
+import { User } from "lucia";
 
-export default function HomeHero() {
+export default function HomeHero({ user }: { user?: User }) {
   return (
     <div className="relative mb-48">
-      <Gradient className="absolute inset-2 bottom-0 top-0 right-0 left-0" />
+      <Gradient className="absolute inset-2 top-0 right-0 bottom-0 left-0" />
       <Container className="relative">
         <Navbar
+          user={user}
           banner={
             <Link
               href="https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX"
@@ -27,19 +29,25 @@ export default function HomeHero() {
             Close every deal.
           </h1>
           <p className="mt-8 max-w-lg text-xl/7 text-zinc-950/75 sm:text-2xl/8">
-            Zim Developers is a community platform of creatives, connecting you with the talent and tools to get work underway.
+            Zim Developers is a community platform of creatives, connecting you
+            with the talent and tools to get work underway.
           </p>
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
-            <Button className="bg-zinc-900 text-white rounded-full p-6">Hire Developer</Button>
-            <Button variant="outline" className="border border-zinc-900/20 shadow-2xl p-6 rounded-full bg-secondaryColor hover:bg-secondaryColor/90">
+            <Button className="rounded-full bg-zinc-900 p-6 text-white">
+              Hire Developer
+            </Button>
+            <Button
+              variant="outline"
+              className="bg-secondaryColor hover:bg-secondaryColor/90 rounded-full border border-zinc-900/20 p-6 shadow-2xl"
+            >
               Get Hired
             </Button>
           </div>
         </div>
-        <div className="md:absolute bottom-0 md:inset-80 md:translate-x-80">
+        <div className="bottom-0 md:absolute md:inset-80 md:translate-x-80">
           <PortfolioCarousel />
         </div>
       </Container>
     </div>
-  )
+  );
 }
