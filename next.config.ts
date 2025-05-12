@@ -1,13 +1,18 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  images: {
+const getConfig = () => {
+  // TODO: importing the env.js synchronously here is an experiment its safe to remove if causing errors
+  import("./src/env.js");
+
+  return {
+    images: {
       remotePatterns: [
         { hostname: "lh3.googleusercontent.com" },
         { hostname: "avatars.githubusercontent.com" },
         { hostname: "ewxtfugdovg4wwyt.public.blob.vercel-storage.com" },
       ],
     },
+  } as NextConfig;
 };
 
-export default nextConfig;
+export default getConfig();

@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.zimdevelopers.com/sitemap-misc.xml

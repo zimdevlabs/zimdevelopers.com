@@ -6,25 +6,40 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { LogIn } from "lucide-react";
 import SignInPageForm from "./form";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
-export default function SignInPageWrapper() {
- 
+export default function SignInPageWrapper({
+  callbackUrl,
+}: {
+  callbackUrl?: string;
+}) {
   return (
-    <div className="container relative flex flex-col items-center justify-center md:grid md:h-screen lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/sign-up"
-        className={cn(
-          buttonVariants({ variant: "ghost" }),
-          "absolute left-4 top-4 md:left-8 md:top-8",
+    <div className="relative container flex flex-col items-center justify-center md:grid md:h-screen lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="relative flex h-full flex-col items-center justify-center">
+        <Link
+          href="/sign-up"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "absolute top-4 right-4 md:top-8 md:right-8",
+          )}
+        >
+          Sign Up Instead
+          <LogIn />
+        </Link>
+        {callbackUrl && (
+          <button
+            onClick={() => window.open(callbackUrl, "_self")}
+            className="absolute top-4 left-4 grid h-8 w-8 place-content-center rounded-full border border-zinc-100 bg-zinc-50 p-2 text-zinc-400 hover:text-zinc-600 md:right-full"
+            aria-label="Close"
+          >
+            <XMarkIcon className="h-5 w-5" />
+          </button>
         )}
-      >
-        Sign Up Instead
-        <LogIn />
-      </Link>
-      <div className="p-8">
-        <SignInPageForm />
+        <div className="p-8">
+          <SignInPageForm callbackUrl={callbackUrl} />
+        </div>
       </div>
-      <div className="relative h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+      <div className="bg-muted relative h-full flex-col p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 mb-4 flex items-center text-lg font-medium md:mb-0">
           <Icons.logoIcon className="mr-2 h-8 w-8" />
