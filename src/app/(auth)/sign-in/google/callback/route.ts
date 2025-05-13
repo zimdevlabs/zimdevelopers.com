@@ -167,7 +167,9 @@ export async function GET(request: NextRequest): Promise<Response> {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: callbackUrl ? callbackUrl : "/",
+          Location: callbackUrl
+            ? `${Paths.GetStarted}?callbackUrl=${callbackUrl}`
+            : Paths.GetStarted,
         },
       });
     } catch (error) {

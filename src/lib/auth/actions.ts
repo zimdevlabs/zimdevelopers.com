@@ -252,7 +252,11 @@ export async function verifyEmail(
   );
 
   const callbackUrl = formData.get("callbackUrl") as string;
-  redirect(callbackUrl ? callbackUrl : `/u/${user.username}`);
+  redirect(
+    callbackUrl
+      ? `${Paths.GetStarted}?callbackUrl=${callbackUrl}`
+      : Paths.GetStarted,
+  );
 }
 
 export async function sendPasswordResetLink(
