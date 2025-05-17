@@ -1,4 +1,12 @@
 services:
+
+  fake-smtp-server:
+    image: rnwood/smtp4dev
+    ports:
+      - 5000:80
+      - 2525:25
+    volumes:
+      - smtp4dev-data:/smtp4dev
   postgres:
     image: postgis/postgis:16-3.5-alpine
     ports:
@@ -9,3 +17,6 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=zimdev
+
+volumes:
+  smtp4dev-data:
