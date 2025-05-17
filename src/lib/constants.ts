@@ -14,7 +14,7 @@ export enum Paths {
   GetStarted = "/get-started",
 }
 
-export const siteConfig = {
+export const siteConfig: siteConfigType = {
   name: "Zim Developers Community",
   shortName: "Zim Developers",
   twitterUsername: "@zimdevlabs",
@@ -25,4 +25,4 @@ export const siteConfig = {
     github: "https://github.com/orgs/zimdevlabs/repositories",
     banner: "https://www.zimdevelopers.com/banner.webp",
   },
-} satisfies siteConfigType;
+}
