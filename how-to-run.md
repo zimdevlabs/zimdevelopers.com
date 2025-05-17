@@ -26,16 +26,16 @@
 #### Variables
 
 ##### You need to create `.env.local` file and set the following variables
-`
-DATABASE_URL="postgres://postgres:password@localhost:5432/zimdev"
-GOOGLE_CLIENT_ID="1"
-GOOGLE_CLIENT_SECRET="1"
-GITHUB_CLIENT_ID="1"
-GITHUB_CLIENT_SECRET="1"
-SMTP_HOST="1"
-SMTP_PORT=22 
-SMTP_USER="1"
-SMTP_PASSWORD="1"
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-DATABASE_URL=postgres://postgres:password@localhost:5432/zimdev
-`
+
+- `DATABASE_URL="postgres://postgres:password@localhost:5432/zimdev"`
+- `GOOGLE_CLIENT_ID="1"`
+- `GOOGLE_CLIENT_SECRET="1"`
+- `GITHUB_CLIENT_ID="1"`
+- `GITHUB_CLIENT_SECRET="1"`
+- `SMTP_HOST="1"`
+- `SMTP_PORT=22`
+- `SMTP_USER="1"`
+- `SMTP_PASSWORD="1"`
+- `NEXT_PUBLIC_APP_URL=http://localhost:3000`
+- `DATABASE_URL=postgres://postgres:password@localhost:5432/zimdev`
+
