@@ -12,9 +12,13 @@ import {
 } from "@/components/ui/card";
 
 export default function GetStartedWrapper() {
+
+
+  //bg-zinc-50
+
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50">
-      <main className="flex-1">
+    <div className="grid grid-cols-1 min-h-screen bg-zinc-50 justify-items-center">
+      <main className="flex-1 w-6xl">
         <section className="container px-4 py-12 sm:px-6 md:py-16 lg:px-8 lg:py-20">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <h1 className="text-2xl tracking-wider sm:text-3xl md:text-4xl">
