@@ -1,15 +1,42 @@
-# ZimDevelopers.com
+<p align="center">
+ <a href="https://github.com/zimdevlabs/zimdevelopers.com">
+   <img src="https://github.com/zimdevlabs/.github/blob/main/profile/banner-alt.png" alt="Logo">
+  </a>
+</p>
 
-Welcome to ZimDevelopers.com, an open-source project based in Zimbabwe! This platform is designed to be a tool for learning, sharing, and promoting developers, with a special focus on the Zimbabwean tech community.
+<h4 align="center">
+  <a href="https://www.zimdevelopers.com">Developer Dashboard</a> |
+  <a href="https://www.zimdevelopers.com/blog">Blog</a> |
+  <a href="https://docs.zimdevelopers.com">Documentation</a> |
+  <a href="https://www.zimdevelopers.com/pro">Zim Developers Pro</a>
+</h4>
 
-## Project Goals
+<div align="center">
+  <h2>
+    An open source developer community. </br>
+    For both hiring and finding work. </br>
+  <br />
+  </h2>
+</div>
 
-- Provide a space for developers to learn and grow
-- Share knowledge and resources within the developer community
-- Promote Zimbabwean developers and their skills
-- Foster collaboration on open-source projects
+<br />
 
-## Planned Features
+<p align="center">
+  <a href="https://github.com/zimdevlabs/zimdevelopers.com/blob/main/LICENSE">
+    <img alt="Zim Developers is released under the MIT license." src="https://img.shields.io/badge/license-MIT-blue.svg"  />
+  </a>
+  <a href="https://docs.zimdevelopers.com/docs/introduction/contributing">
+    <img alt="PRs welcome!" src="https://img.shields.io/badge/Read%20the%20Docs-8CA1AF?logo=readthedocs&logoColor=fff"  />
+  </a>
+  <a href="https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX">
+    <img alt="Chat on Whatsapp" src="https://img.shields.io/badge/WhatsApp-25D366?logo=whatsapp&logoColor=fff&style=flat"/>
+  </a>
+  <a href="https://x.com/zimdevlabs">
+    <img alt="Follow Zim Developers on X" src="https://img.shields.io/badge/Twitter-%23000000.svg?logo=X&logoColor=white"/>
+  </a>
+</p>
+
+## Features
 
 We have several exciting features in the pipeline:
 
@@ -21,14 +48,21 @@ We have several exciting features in the pipeline:
 
 More features will be announced as the project progresses.
 
-## How to Contribute
+## Contribution
 
-We welcome contributions from developers of all skill levels! Here's how you can get involved:
+> Have a look at [contribution docs](./CONTRIBUTING.md) for how to contribute to the project
 
-1. Join the Zim Developers Labs group on WhatsApp: [Join here](https://chat.whatsapp.com/FfXS39iLv7k36jrskKjOfX)
-2. Follow our project progress on GitHub: [ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
-3. Watch for announcements and contribute to discussions
-4. Submit pull requests for new features or bug fixes
+- Missing something or found a bug? [Report here](https://github.com/zimdevlabs/zimdevelopers.com/issues).
+- Add new articles to the blog
+- Suggest changes to existing files
+- Discuss ideas in issues
+- Spread the word
+
+Here are some people who have contributed to Zim Developers so far ❤:
+
+<a href="https://github.com/zimdevlabs/zimdevelopers.com/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zimdevlabs/zimdevelopers.com" />
+</a>
 
 ## Connect With Us
 
@@ -40,12 +74,3 @@ Stay updated with our progress and connect with the community through our social
 - YouTube: [ZimDevLabs](https://youtube.com/zimdevlabs)
 - GitHub: [zimdevlabs](https://github.com/zimdevlabs)
 - Patreon: [ZimDevLabs](https://patreon.com/zimdevlabs)
-
-## Project Progress
-
-You can track the development progress and contribute to the project on our GitHub project board:
-[ZimDevLabs Project Board](https://github.com/orgs/zimdevlabs/projects/1/views/1)
-
----
-
-We're excited to have you join us on this journey to empower and showcase Zimbabwean developers. Let's build something amazing together!
