@@ -1,6 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { countries } from "@/lib/constants";
 import { ChevronLeft, RefreshCw, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -10,12 +19,26 @@ type DeveloperForm1Props = {
   nextStage: () => void;
 };
 
+// Sample skill suggestions
+const allSkills = [
+  "Frontend Engineer",
+  "Backend Developer",
+  "UI Designer",
+  "UX Designer",
+  "Brand Designer",
+  "Copywriter",
+  "Project Manager",
+  "Full Stack Developer",
+  "DevOps Engineer",
+  "Product Manager",
+];
+
 export default function DeveloperForm1({
   nextStage,
   prevStage,
 }: DeveloperForm1Props) {
   // One-liner state
-  const [oneLiner, setOneLiner] = useState("");
+  const [bio, setBio] = useState("");
   const maxChars = 60;
 
   // Skills state
@@ -24,19 +47,8 @@ export default function DeveloperForm1({
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const maxSkills = 3;
 
-  // Sample skill suggestions
-  const allSkills = [
-    "Frontend Engineer",
-    "Backend Developer",
-    "UI Designer",
-    "UX Designer",
-    "Brand Designer",
-    "Copywriter",
-    "Project Manager",
-    "Full Stack Developer",
-    "DevOps Engineer",
-    "Product Manager",
-  ];
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   // Filter suggestions based on input
   useEffect(() => {
@@ -122,24 +134,22 @@ export default function DeveloperForm1({
               {/* One-liner input */}
               <div className="space-y-2">
                 <label
-                  htmlFor="one-liner"
+                  htmlFor="bio"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  One-liner
+                  Bio
                 </label>
                 <div className="relative">
                   <textarea
-                    id="one-liner"
-                    value={oneLiner}
-                    onChange={(e) =>
-                      setOneLiner(e.target.value.slice(0, maxChars))
-                    }
+                    id="bio"
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value.slice(0, maxChars))}
                     placeholder="Highlight your creative focus."
                     className="min-h-[100px] w-full resize-none rounded-lg border border-gray-300 p-3 placeholder:text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                     maxLength={maxChars}
                   />
                   <div className="absolute right-2 bottom-2 text-xs text-gray-500">
-                    {oneLiner.length}/{maxChars}
+                    {bio.length}/{maxChars}
                   </div>
                 </div>
               </div>
@@ -204,8 +214,44 @@ export default function DeveloperForm1({
                   )}
 
                   {/* Skills count */}
-                  <div className="absolute right-2 bottom-2 text-sm text-gray-500">
+                  <div className="absolute right-2 bottom-2 text-xs text-gray-500">
                     {skills.length}/{maxSkills}
+                  </div>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="one-liner"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Location
+                </label>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Select value={country} onValueChange={setCountry}>
+                      <SelectTrigger id="country" className="w-full py-7">
+                        <SelectValue placeholder="Select a country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {countries.map((country) => (
+                          <SelectItem key={country} value={country}>
+                            {country}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Input
+                      id="city"
+                      className="h-14"
+                      placeholder="Enter your city"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
@@ -261,9 +307,9 @@ export default function DeveloperForm1({
               <div className="mb-8 flex w-full items-center">
                 <Button
                   className="mx-auto px-10"
-                  disabled={skills.length < 1 || oneLiner.length < 1}
+                  disabled={skills.length < 1 || bio.length < 1}
                   onClick={() => {
-                    if (skills.length > 0 && oneLiner.length > 0) {
+                    if (skills.length > 0 && bio.length > 0) {
                       nextStage();
                     }
                   }}

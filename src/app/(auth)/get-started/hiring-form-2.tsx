@@ -9,17 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { countries, countryCodes } from "@/lib/constants";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
-import { ChevronLeft, Linkedin, RefreshCw, Upload } from "lucide-react";
+import { countries } from "@/lib/constants";
+import { ChevronLeft, LinkIcon, RefreshCw, Upload } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import ReactCountryFlag from "react-country-flag";
 
 type HiringFormProps = {
   prevStage: () => void;
@@ -55,20 +48,8 @@ export default function HiringForm2({
 }
 
 function IndividualHiring() {
-  const [selectedCountryCode, setSelectedCountryCode] = useState(
-    countryCodes[0],
-  );
-  const [phoneNumber, setPhoneNumber] = useState("");
-
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Remove all spaces from the input
-    const cleaned = e.target.value.replace(/\s/g, "");
-
-    // Only allow numbers, +, -, and ()
-    const valid = cleaned.replace(/[^\d+()-]/g, "");
-
-    setPhoneNumber(valid);
-  };
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
 
   const [photo, setPhoto] = useState<string | null>(
     "/placeholder.svg?height=120&width=120",
@@ -90,7 +71,7 @@ function IndividualHiring() {
       <span className="mb-4 block text-xs text-zinc-600 md:text-sm">
         Step 2/2
       </span>
-      <h1 className="mb-8 text-2xl">What do you do?</h1>
+      <h1 className="mb-8 text-2xl">Hiring profile setup?</h1>
       <p className="mb-4 text-zinc-600">
         Set up your profile for this workspace.
       </p>
@@ -100,87 +81,48 @@ function IndividualHiring() {
             <Input className="h-14" placeholder="Professional Title" />
           </div>
         </div>
-        <div>
-          <div className="relative">
-            <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-              <Linkedin className="h-5 w-5 text-zinc-500" />
-            </div>
-            <Input className="h-14 pl-10" placeholder="LinkedIn URL" />
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+            <LinkIcon className="h-5 w-5 text-zinc-500" />
           </div>
+          <Input
+            className="h-14 pl-10"
+            placeholder="Linkedin, X, Instagram, etc."
+          />
         </div>
-        <div>
-          <p className="mb-4 text-zinc-600">Add your business phone number.</p>
-          <div className="relative rounded-md">
-            <Listbox
-              value={selectedCountryCode}
-              onChange={setSelectedCountryCode}
-            >
-              <div className="absolute inset-y-0 left-0">
-                <ListboxButton className="flex h-full items-center gap-2 rounded-l-md border-0 py-0 pr-4 pl-3 text-gray-500 outline-none sm:text-sm">
-                  <ReactCountryFlag
-                    countryCode={selectedCountryCode!.code}
-                    svg
-                  />
-                  <span>{selectedCountryCode!.code}</span>
-                  <svg
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </ListboxButton>
+        <div className="space-y-2">
+          <label
+            htmlFor="one-liner"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Location
+          </label>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Select value={country} onValueChange={setCountry}>
+                <SelectTrigger id="country" className="w-full py-7">
+                  <SelectValue placeholder="Select a country" />
+                </SelectTrigger>
+                <SelectContent>
+                  {countries.map((country) => (
+                    <SelectItem key={country} value={country}>
+                      {country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-                <ListboxOptions
-                  transition
-                  className="absolute top-full left-0 z-10 mt-1 max-h-60 w-56 overflow-auto rounded-md border border-gray-200 bg-white shadow-lg"
-                >
-                  {countryCodes.slice(0, 2).map((country) => (
-                    <ListboxOption
-                      key={country.code}
-                      value={country}
-                      className="flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-left text-sm hover:bg-gray-100"
-                    >
-                      <ReactCountryFlag countryCode={country.code} svg />
-                      <span>{country.name}</span>
-                      <span className="ml-auto text-gray-500">
-                        {country.dialCode}
-                      </span>
-                    </ListboxOption>
-                  ))}
-                  <div className="h-[1px] w-full bg-gray-200"></div>
-                  {countryCodes.slice(2).map((country) => (
-                    <ListboxOption
-                      key={country.code}
-                      value={country}
-                      className="flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-left text-sm hover:bg-gray-100"
-                    >
-                      <ReactCountryFlag countryCode={country.code} svg />
-                      <span>{country.name}</span>
-                      <span className="ml-auto text-gray-500">
-                        {country.dialCode}
-                      </span>
-                    </ListboxOption>
-                  ))}
-                </ListboxOptions>
-              </div>
-            </Listbox>
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-              placeholder="+263 78 765 4321"
-              className="block h-14 w-full rounded-md border border-gray-200 py-2 pl-24 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-            />
+            <div className="space-y-2">
+              <Input
+                id="city"
+                className="h-14"
+                placeholder="Enter your city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="mt-2 text-xs text-zinc-600">Optional</div>
         </div>
         <div>
           <div className="flex items-start gap-6">
@@ -238,7 +180,7 @@ function IndividualHiring() {
 }
 
 function CompanyHiring({ companyName }: { companyName: string }) {
-  const [oneLiner, setOneLiner] = useState("");
+  const [description, setDescription] = useState("");
   const maxChars = 160;
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -274,6 +216,7 @@ function CompanyHiring({ companyName }: { companyName: string }) {
               className="h-14"
               placeholder="Company Name"
               value={companyName}
+              readOnly
             />
           </div>
         </div>
@@ -287,14 +230,16 @@ function CompanyHiring({ companyName }: { companyName: string }) {
           <div className="relative">
             <textarea
               id="one-liner"
-              value={oneLiner}
-              onChange={(e) => setOneLiner(e.target.value.slice(0, maxChars))}
+              value={description}
+              onChange={(e) =>
+                setDescription(e.target.value.slice(0, maxChars))
+              }
               placeholder="Highlight your company focus."
               className="min-h-[100px] w-full resize-none rounded-lg border border-gray-300 p-3 placeholder:text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               maxLength={maxChars}
             />
             <div className="absolute right-2 bottom-2 text-xs text-gray-500">
-              {oneLiner.length}/{maxChars}
+              {description.length}/{maxChars}
             </div>
           </div>
         </div>
