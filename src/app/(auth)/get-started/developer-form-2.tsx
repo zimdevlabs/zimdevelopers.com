@@ -1,15 +1,36 @@
 "use client";
 
+import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { create_developer_profile } from "@/lib/profiles/actions";
 import { ChevronLeft, Linkedin, LinkIcon, PlusCircle, X } from "lucide-react";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 type DeveloperFormProps = {
   prevStage: () => void;
+  userId: string;
+  username: string;
+  bio: string;
+  skills: string[];
+  country: string;
+  city: string;
+  photoUrl: string;
 };
 
-export default function DeveloperForm2({ prevStage }: DeveloperFormProps) {
+export default function DeveloperForm2({
+  prevStage,
+  photoUrl,
+  bio,
+  city,
+  country,
+  skills,
+  userId,
+  username,
+}: DeveloperFormProps) {
+  const [linkedInUrl, setLinkedIn] = useState<string>("");
+  const [firstAdditional, setFirstAdditional] = useState<string>("");
   const [additionalLinks, setAdditionalLinks] = useState<string[]>([]);
 
   const handleAddLink = () => {
@@ -27,6 +48,28 @@ export default function DeveloperForm2({ prevStage }: DeveloperFormProps) {
     newLinks[index] = value;
     setAdditionalLinks(newLinks);
   };
+
+  const [state, formAction] = useActionState(create_developer_profile, null);
+
+  const otherLinks = [...additionalLinks, firstAdditional].filter(
+    (link) => link !== "",
+  );
+
+  useEffect(() => {
+    if (state?.fieldError) {
+      Object.values(state.fieldError).forEach((error) => {
+        toast.error(error);
+      });
+    }
+
+    if (state?.done) {
+      toast.success(state.successMessage);
+    }
+
+    if (state?.formError) {
+      toast.error(state.formError);
+    }
+  }, [state]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -48,65 +91,112 @@ export default function DeveloperForm2({ prevStage }: DeveloperFormProps) {
             <p className="mb-4 text-zinc-600">
               Add two social links to verify your digital identity.
             </p>
-            <div className="space-y-8">
-              <div>
-                <div className="relative">
-                  <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-                    <Linkedin className="h-5 w-5 text-zinc-500" />
+            <form action={formAction}>
+              <input type="hidden" value={userId} name="userId" />
+              <input type="hidden" value={username} name="username" />
+              <input type="hidden" value={bio} name="bio" />
+              <input
+                type="hidden"
+                value={JSON.stringify(skills)}
+                name="skills"
+              />
+              <input type="hidden" value={country} name="country" />
+              <input type="hidden" value={city} name="city" />
+              <input type="hidden" value={photoUrl} name="avatar" />
+              <input
+                type="hidden"
+                value={JSON.stringify(otherLinks)}
+                name="otherLinks"
+              />
+              <div className="space-y-8">
+                <div>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+                      <Linkedin className="h-5 w-5 text-zinc-500" />
+                    </div>
+                    <Input
+                      value={linkedInUrl}
+                      onChange={(e) => setLinkedIn(e.target.value)}
+                      type="url"
+                      required
+                      autoComplete="off"
+                      name="linkedInUrl"
+                      className="h-14 pl-10"
+                      placeholder="LinkedIn URL"
+                    />
                   </div>
-                  <Input className="h-14 pl-10" placeholder="LinkedIn URL" />
                 </div>
-              </div>
 
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-                  <LinkIcon className="h-5 w-5 text-zinc-500" />
-                </div>
-                <Input
-                  className="h-14 pl-10"
-                  placeholder="Twitter / X, Instagram, etc."
-                />
-              </div>
-
-              {additionalLinks.map((link, index) => (
-                <div key={index} className="relative">
+                <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
                     <LinkIcon className="h-5 w-5 text-zinc-500" />
                   </div>
                   <Input
-                    className="h-14 pr-10 pl-10"
-                    placeholder="Add another social link"
-                    value={link}
-                    onChange={(e: any) =>
-                      handleLinkChange(index, e.target.value)
-                    }
+                    className="h-14 pl-10"
+                    placeholder="Twitter / X, Instagram, etc."
+                    value={firstAdditional}
+                    onChange={(e: any) => setFirstAdditional(e.target.value)}
+                    type="url"
                   />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 hover:text-zinc-600"
-                    onClick={() => handleRemoveLink(index)}
-                  >
-                    <X className="h-5 w-5" />
-                    <span className="sr-only">Remove link</span>
-                  </Button>
                 </div>
-              ))}
 
-              <Button
-                variant="ghost"
-                className="mt-2 flex items-center justify-center rounded-full p-0 text-zinc-500"
-                onClick={handleAddLink}
-              >
-                <PlusCircle className="h-6 w-6" strokeWidth={2} />
-                <span>Add another link</span>
-              </Button>
-            </div>
-            <div className="mt-8 flex items-center justify-center">
-              <Button className="rounded-full bg-zinc-900 px-6 py-2 text-white hover:bg-zinc-800">
-                Complete
-              </Button>
-            </div>
+                {additionalLinks.map((link, index) => (
+                  <div key={index} className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+                      <LinkIcon className="h-5 w-5 text-zinc-500" />
+                    </div>
+                    <Input
+                      className="h-14 pr-10 pl-10"
+                      placeholder="Add another social link"
+                      value={link}
+                      onChange={(e: any) =>
+                        handleLinkChange(index, e.target.value)
+                      }
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 hover:text-zinc-600"
+                      onClick={() => handleRemoveLink(index)}
+                    >
+                      <X className="h-5 w-5" />
+                      <span className="sr-only">Remove link</span>
+                    </Button>
+                  </div>
+                ))}
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="flex items-center justify-center rounded-full p-0 text-zinc-500"
+                  onClick={handleAddLink}
+                >
+                  <PlusCircle className="h-6 w-6" strokeWidth={2} />
+                  <span>Add another link</span>
+                </Button>
+              </div>
+              {state?.fieldError ? (
+                <ul className="bg-destructive/10 text-destructive list-disc space-y-1 rounded-lg border p-2 text-[0.8rem] font-medium">
+                  {Object.values(state.fieldError).map((err, i) => (
+                    <li className="ml-4" key={i}>
+                      {err}
+                    </li>
+                  ))}
+                </ul>
+              ) : state?.formError ? (
+                <p className="bg-destructive/10 text-destructive rounded-lg border p-2 text-[0.8rem] font-medium">
+                  {state?.formError}
+                </p>
+              ) : null}
+              <div className="my-8 flex items-center justify-center">
+                <SubmitButton
+                  disabled={!linkedInUrl}
+                  className="rounded-full bg-zinc-900 px-6 py-2 text-white hover:bg-zinc-800"
+                >
+                  Complete
+                </SubmitButton>
+              </div>
+            </form>
           </div>
         </div>
       </div>

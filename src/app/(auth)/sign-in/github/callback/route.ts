@@ -189,8 +189,8 @@ export async function GET(request: NextRequest): Promise<Response> {
         status: 302,
         headers: {
           Location: callbackUrl
-            ? `${Paths.GetStarted}?callbackUrl=${callbackUrl}`
-            : Paths.GetStarted,
+            ? `${Paths.OnBoarding}?callbackUrl=${callbackUrl}`
+            : Paths.OnBoarding,
         },
       });
     } catch (error) {

@@ -11,7 +11,7 @@ export enum Paths {
   Signup = "/sign-up",
   VerifyEmail = "/verify-email",
   ResetPassword = "/reset-password",
-  GetStarted = "/get-started",
+  OnBoarding = "/get-started",
 }
 
 export const siteConfig = {

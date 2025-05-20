@@ -254,8 +254,8 @@ export async function verifyEmail(
   const callbackUrl = formData.get("callbackUrl") as string;
   redirect(
     callbackUrl
-      ? `${Paths.GetStarted}?callbackUrl=${callbackUrl}`
-      : Paths.GetStarted,
+      ? `${Paths.OnBoarding}?callbackUrl=${callbackUrl}`
+      : Paths.OnBoarding,
   );
 }
 

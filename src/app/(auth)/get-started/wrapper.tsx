@@ -7,14 +7,23 @@ import HiringForm2 from "./hiring-form-2";
 import DeveloperForm2 from "./developer-form-2";
 import HiringForm1 from "./hiring-form-1";
 import DeveloperForm1 from "./developer-form-1";
+import { User } from "lucia";
 
-export default function GetStartedWrapper() {
+export default function GetStartedWrapper({ user }: { user: User }) {
   const [currentStage, setCurrentStage] = useState(1);
   const [isHiring, setIsHiring] = useState(false);
   const [isDeveloper, setIsDeveloper] = useState(false);
   const totalStages = 3;
   const [isIndividual, setIsIndividual] = useState(false);
   const [companyName, setCompanyName] = useState("");
+
+  // States for Developer Form1
+
+  const [bio, setBio] = useState("");
+  const [skills, setSkills] = useState<string[]>([]);
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(user.avatar || "");
 
   const nextStage = () => {
     if (currentStage < totalStages) {
@@ -56,7 +65,23 @@ export default function GetStartedWrapper() {
           );
         }
         if (isDeveloper) {
-          return <DeveloperForm1 prevStage={prevStage} nextStage={nextStage} />;
+          return (
+            <DeveloperForm1
+              userId={user.id}
+              prevStage={prevStage}
+              nextStage={nextStage}
+              bio={bio}
+              city={city}
+              country={country}
+              skills={skills}
+              setBio={setBio}
+              setCity={setCity}
+              setCountry={setCountry}
+              setSkills={setSkills}
+              setPhotoUrl={setPhotoUrl}
+              photoUrl={photoUrl}
+            />
+          );
         }
 
       case 3:
@@ -70,7 +95,18 @@ export default function GetStartedWrapper() {
           );
         }
         if (isDeveloper) {
-          return <DeveloperForm2 prevStage={prevStage} />;
+          return (
+            <DeveloperForm2
+              prevStage={prevStage}
+              photoUrl={photoUrl}
+              bio={bio}
+              city={city}
+              country={country}
+              skills={skills}
+              username={user.username}
+              userId={user.id}
+            />
+          );
         }
     }
   };

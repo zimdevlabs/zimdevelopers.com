@@ -10,13 +10,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { countries } from "@/lib/constants";
+import { updateAvatarUrl } from "@/lib/profiles/actions";
 import { ChevronLeft, RefreshCw, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import ImageCropModal from "./crop-modal";
 
 type DeveloperForm1Props = {
   prevStage: () => void;
   nextStage: () => void;
+  bio: string;
+  setBio: (bio: string) => void;
+  skills: string[];
+  setSkills: (skills: string[]) => void;
+  country: string;
+  setCountry: (country: string) => void;
+  city: string;
+  setCity: (city: string) => void;
+  photoUrl: string;
+  setPhotoUrl: (photoUrl: string) => void;
+  userId: string;
 };
 
 // Sample skill suggestions
@@ -36,19 +50,23 @@ const allSkills = [
 export default function DeveloperForm1({
   nextStage,
   prevStage,
+  bio,
+  setBio,
+  skills,
+  setSkills,
+  country,
+  setCountry,
+  city,
+  setCity,
+  photoUrl,
+  setPhotoUrl,
+  userId,
 }: DeveloperForm1Props) {
-  // One-liner state
-  const [bio, setBio] = useState("");
   const maxChars = 60;
-
   // Skills state
-  const [skills, setSkills] = useState<string[]>([]);
   const [skillInput, setSkillInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const maxSkills = 3;
-
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
 
   // Filter suggestions based on input
   useEffect(() => {
@@ -98,16 +116,86 @@ export default function DeveloperForm1({
     }
   };
 
-  const [photo, setPhoto] = useState<string | null>(
-    "/placeholder.svg?height=120&width=120",
-  );
+  // avatar
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const validateFileType = (file: File) => {
+    const validTypes = ["image/png", "image/webp", "image/jpeg", "image/gif"];
+    if (!validTypes.includes(file.type)) {
+      toast.error("Only PNG, WebP, JPEG, and GIF files are allowed");
+      return false;
+    }
+    return true;
+  };
+
+  const uploadAvatar = async (croppedImageBlob: Blob) => {
+    const formData = new FormData();
+    formData.append("file", croppedImageBlob, "avatar.png");
+    formData.append("userId", userId);
+
+    setProgress(0);
+    setIsUploading(true);
+    try {
+      const response = await fetch(
+        `/api/upload?filename=${userId}-avatar.png`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      if (!response.ok) {
+        toast.error("Upload failed");
+        throw new Error("Upload failed");
+      }
+
+      const data = await response.json();
+      setPhotoUrl(data.url);
+      updateAvatarUrl(data.url, userId);
+
+      toast.success("Avatar uploaded successfuly.");
+      setProgress(100);
+      setIsUploading(false);
+    } catch (error) {
+      console.error("Error uploading avatar:", error);
+      toast.error("Failed to upload avatar. Please try again.");
+    }
+    setIsUploading(false);
+  };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    console.log("we are here");
     if (file) {
+      if (!validateFileType(file)) {
+        return;
+      }
+
+      if (file.size > 1024 * 1024) {
+        toast(
+          "File size must be less than 1MB. Crop or use an image compressor",
+          {
+            action: {
+              label: "Compress",
+              onClick: () =>
+                window.open(
+                  "https://www.iloveimg.com/compress-image",
+                  "_blank",
+                ),
+            },
+          },
+        );
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (e) => {
-        setPhoto(e.target?.result as string);
+        setSelectedImage(e.target?.result as string);
+        setIsModalOpen(true);
       };
       reader.readAsDataURL(file);
     }
@@ -261,19 +349,15 @@ export default function DeveloperForm1({
                 <div className="flex items-start gap-6">
                   <div className="relative">
                     <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-200">
-                      {photo ? (
-                        <Image
-                          src={photo || "/placeholder.svg"}
-                          alt="Profile"
-                          className="h-full w-full object-cover"
-                          width={96}
-                          height={96}
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-gray-100">
-                          <span className="text-gray-400">Photo</span>
-                        </div>
-                      )}
+                      <Image
+                        src={
+                          photoUrl || "/placeholder.svg?height=120&width=120"
+                        }
+                        alt="Profile"
+                        className="h-full w-full object-cover"
+                        width={96}
+                        height={96}
+                      />
                     </div>
                   </div>
 
@@ -307,7 +391,13 @@ export default function DeveloperForm1({
               <div className="mb-8 flex w-full items-center">
                 <Button
                   className="mx-auto px-10"
-                  disabled={skills.length < 1 || bio.length < 1}
+                  disabled={
+                    skills.length < 1 ||
+                    bio.length < 1 ||
+                    !country ||
+                    !city ||
+                    photoUrl.length < 1
+                  }
                   onClick={() => {
                     if (skills.length > 0 && bio.length > 0) {
                       nextStage();
@@ -321,6 +411,24 @@ export default function DeveloperForm1({
           </div>
         </div>
       </div>
+      {isModalOpen && selectedImage && (
+        <ImageCropModal
+          isUploading={isUploading}
+          progress={progress}
+          imageUrl={selectedImage}
+          onClose={() => setIsModalOpen(false)}
+          onSave={(croppedImage) => {
+            fetch(croppedImage)
+              .then((res) => res.blob())
+              .then((blob) => uploadAvatar(blob))
+              .then(() => setIsModalOpen(false))
+              .catch((error) => {
+                console.error("Error processing cropped image:", error);
+                alert("Failed to process the cropped image. Please try again.");
+              });
+          }}
+        />
+      )}
     </div>
   );
 }

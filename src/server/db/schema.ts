@@ -63,13 +63,12 @@ export const developerProfiles = pgTable("developer_profiles", {
     .notNull()
     .references(() => users.id),
   bio: varchar("bio", { length: 60 }),
-  skills: text("skills"),
+  skills: text("skills").array(),
   country: varchar("country", { length: 60 }),
   city: varchar("city", { length: 32 }),
   avatar: varchar("avatar", { length: 255 }),
-  githubUrl: varchar("github_url", { length: 255 }),
-  linkedinUrl: varchar("linkedin_url", { length: 255 }),
-  otherLinks: text("other_links"),
+  linkedInUrl: varchar("linkedin_url", { length: 255 }),
+  otherLinks: text("other_links").array(),
 });
 
 export type DeveloperProfile = typeof developerProfiles.$inferSelect;

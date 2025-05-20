@@ -13,5 +13,5 @@ export default async function GetStartedPage() {
     return redirect(`/u/${user.id}`);
   }
 
-  return <GetStartedWrapper />;
+  return <GetStartedWrapper user={user} />;
 }
