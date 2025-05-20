@@ -32,8 +32,6 @@ export const users = pgTable(
     ),
     fullName: varchar("full_name", { length: 32 }).notNull(),
     username: varchar("username", { length: 48 }).unique().notNull(),
-    country: varchar("country", { length: 60 }),
-    city: varchar("city", { length: 32 }),
     devProfileCompleted: boolean("dev_profile_completed").default(false),
     empProfileCompleted: boolean("emp_profile_completed").default(false),
     totalPoints: integer("total_points").notNull().default(0),
@@ -58,6 +56,42 @@ export const users = pgTable(
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+
+export const developerProfiles = pgTable("developer_profiles", {
+  id: varchar("id", { length: 21 }).primaryKey(),
+  userId: varchar("user_id", { length: 21 })
+    .notNull()
+    .references(() => users.id),
+  bio: varchar("bio", { length: 60 }),
+  skills: text("skills"),
+  country: varchar("country", { length: 60 }),
+  city: varchar("city", { length: 32 }),
+  avatar: varchar("avatar", { length: 255 }),
+  githubUrl: varchar("github_url", { length: 255 }),
+  linkedinUrl: varchar("linkedin_url", { length: 255 }),
+  otherLinks: text("other_links"),
+});
+
+export type DeveloperProfile = typeof developerProfiles.$inferSelect;
+export type NewDeveloperProfile = typeof developerProfiles.$inferInsert;
+
+export const employerProfiles = pgTable("employer_profiles", {
+  id: varchar("id", { length: 21 }).primaryKey(),
+  userId: varchar("user_id", { length: 21 })
+    .notNull()
+    .references(() => users.id),
+  title: varchar("title", { length: 100 }),
+  type: varchar("type", { length: 10 }), // company or individual
+  companyName: varchar("company_name", { length: 32 }),
+  companyBio: varchar("company_bio", { length: 255 }),
+  country: varchar("country", { length: 60 }),
+  city: varchar("city", { length: 32 }),
+  avatar: varchar("avatar", { length: 255 }),
+  socialLink: varchar("social_link", { length: 255 }),
+});
+
+export type EmployerProfile = typeof employerProfiles.$inferSelect;
+export type NewEmployerProfile = typeof employerProfiles.$inferInsert;
 
 export const sessions = pgTable(
   "sessions",

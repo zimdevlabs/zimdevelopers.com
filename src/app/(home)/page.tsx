@@ -2,6 +2,7 @@ import HomeLayout from "@/components/home";
 import { validateRequest } from "@/lib/auth/validate-request";
 import { preparePageMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const generateMetadata = (): Metadata =>
   preparePageMetadata({
@@ -13,6 +14,12 @@ export const generateMetadata = (): Metadata =>
 
 export default async function HomePage() {
   const { user } = await validateRequest();
+
+  if (user) {
+    if (!user.devProfileCompleted || !user.empProfileCompleted) {
+      return redirect("/get-started");
+    }
+  }
 
   return (
     <>
