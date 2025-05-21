@@ -16,9 +16,9 @@ export default async function HomePage() {
   const { user } = await validateRequest();
 
   if (user) {
-    if (!user.devProfileCompleted && !user.empProfileCompleted) {
-      return redirect("/get-started");
-    }
+    if (user.devProfileCompleted) return redirect("/developer-workspace");
+    if (user.empProfileCompleted) return redirect("/hiring-workspace");
+    return redirect("/get-started");
   }
 
   return (
