@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const createDevProfileShema = z.object({
-  username: z.string().min(1, "Username is required."),
   userId: z.string().min(1, "User ID is required."),
   bio: z
     .string()
@@ -25,7 +24,6 @@ export type CreateDevProfileInput = z.infer<typeof createDevProfileShema>;
 
 export const createEmpProfileSchema = z
   .object({
-    username: z.string().min(1, "Username is required."),
     userId: z.string().min(1, "User ID is required."),
     type: z.enum(["company", "individual"]),
     companyName: z.string().optional(),

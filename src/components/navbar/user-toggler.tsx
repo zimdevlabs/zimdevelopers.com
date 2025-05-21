@@ -54,7 +54,13 @@ export default function UserToggler({ user }: UserTogglerProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <Link href={`/u/${user.username}`}>
+          <Link
+            href={
+              user.devProfileCompleted
+                ? "/developer-workspace/home"
+                : "/hiring-workspace/home"
+            }
+          >
             <DropdownMenuItem>Profile</DropdownMenuItem>
           </Link>
           <Link href="/u/settings">

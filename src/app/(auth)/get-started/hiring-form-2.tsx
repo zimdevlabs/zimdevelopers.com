@@ -23,7 +23,6 @@ import ImageCropModal from "./crop-modal";
 
 type TypeHiringProps = {
   userId: string;
-  username: string;
   photoUrl: string;
   setPhotoUrl: (photoUrl: string) => void;
   companyName?: string;
@@ -41,7 +40,6 @@ export default function HiringForm2({
   photoUrl,
   setPhotoUrl,
   userId,
-  username,
 }: HiringFormProps) {
   return (
     <div className="flex min-h-screen flex-col">
@@ -60,7 +58,6 @@ export default function HiringForm2({
               type="individual"
               photoUrl={photoUrl}
               userId={userId}
-              username={username}
               setPhotoUrl={setPhotoUrl}
             />
           )}
@@ -71,7 +68,6 @@ export default function HiringForm2({
               photoUrl={photoUrl}
               type="company"
               userId={userId}
-              username={username}
             />
           )}
         </div>
@@ -84,7 +80,6 @@ type IndividualHiringProps = {
   type: string;
   photoUrl: string;
   userId: string;
-  username: string;
   setPhotoUrl: (photoUrl: string) => void;
 };
 
@@ -93,7 +88,6 @@ function IndividualHiring({
   photoUrl,
   setPhotoUrl,
   userId,
-  username,
 }: IndividualHiringProps) {
   const [country, setCountry] = useState("");
   const [title, setTitle] = useState("");
@@ -213,7 +207,6 @@ function IndividualHiring({
       </p>
       <form action={formAction} className="mb-8 space-y-8">
         <input type="hidden" value={userId} name="userId" />
-        <input type="hidden" value={username} name="username" />
         <input type="hidden" value={type} name="type" />
         <input type="hidden" value={photoUrl} name="avatar" />
         <div>
@@ -365,7 +358,6 @@ type CompanyHiringProps = {
   type: string;
   photoUrl: string;
   userId: string;
-  username: string;
   companyName: string;
   setPhotoUrl: (photoUrl: string) => void;
 };
@@ -375,7 +367,6 @@ function CompanyHiring({
   photoUrl,
   type,
   userId,
-  username,
   setPhotoUrl,
 }: CompanyHiringProps) {
   const maxChars = 160;
@@ -497,7 +488,6 @@ function CompanyHiring({
       </p>
       <form action={formAction} className="mb-8 space-y-8">
         <input type="hidden" value={userId} name="userId" />
-        <input type="hidden" value={username} name="username" />
         <input type="hidden" value={type} name="type" />
         <input type="hidden" value={photoUrl} name="avatar" />
         <div>

@@ -22,7 +22,12 @@ export default async function VerifyEmailPage({
   const { callbackUrl } = await searchParams;
 
   if (!user) redirect(Paths.Login);
-  if (user.emailVerified) redirect(callbackUrl || `/u/${user.username}`);
+  if (user.emailVerified)
+    redirect(
+      callbackUrl || user.devProfileCompleted
+        ? "/developer-workspace/home"
+        : "/hiring-workspace/home",
+    );
 
   return (
     <>

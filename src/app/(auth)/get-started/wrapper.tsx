@@ -91,7 +91,6 @@ export default function GetStartedWrapper({ user }: { user: User }) {
               setPhotoUrl={setPhotoUrl}
               photoUrl={photoUrl}
               userId={user.id}
-              username={user.username}
               companyName={companyName}
               isIndividual={isIndividual}
               prevStage={prevStage}
@@ -107,7 +106,6 @@ export default function GetStartedWrapper({ user }: { user: User }) {
               city={city}
               country={country}
               skills={skills}
-              username={user.username}
               userId={user.id}
             />
           );

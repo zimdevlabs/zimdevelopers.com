@@ -82,7 +82,11 @@ export async function login(
 
   const callbackUrl = formData.get("callbackUrl") as string;
 
-  return redirect(callbackUrl || `/u/${existingUser.username}`);
+  return redirect(
+    callbackUrl || existingUser.devProfileCompleted
+      ? "/developer-workspace/home"
+      : "/hiring-workspace/home",
+  );
 }
 
 export async function signup(
@@ -337,7 +341,11 @@ export async function resetPassword(
 
   const { user } = await validateRequest();
 
-  redirect(user ? `/u/${user.username}` : Paths.Home);
+  redirect(
+    user
+      ? `${user.devProfileCompleted ? "/developer-workspace/home" : "/hiring-workspace/home"}`
+      : Paths.Home,
+  );
 }
 
 const timeFromNow = (time: Date) => {

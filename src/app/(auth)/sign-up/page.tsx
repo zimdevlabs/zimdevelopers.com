@@ -21,7 +21,12 @@ export default async function SignUpPage({
 
   const { user } = await validateRequest();
 
-  if (user) redirect(callbackUrl || `/u/${user.username}`);
+  if (user)
+    redirect(
+      callbackUrl || user.devProfileCompleted
+        ? "/developer-workspace/home"
+        : "/hiring-workspace/home",
+    );
 
   return <SignUpPageWrapper callbackUrl={callbackUrl} />;
 }

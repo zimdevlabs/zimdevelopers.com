@@ -1,5 +1,4 @@
 import { validateRequest } from "@/lib/auth/validate-request";
-import OwnerWrapper from "./owner-wrapper";
 import { getGuestUserByUsername } from "@/lib/actions/general";
 import { notFound, redirect } from "next/navigation";
 import GuestWrapper from "./guest-wrapper";
@@ -19,7 +18,7 @@ export default async function UserProfile({ params }: Props) {
     if (!user.devProfileCompleted && !user.empProfileCompleted) {
       return redirect("/get-started");
     }
-    return <OwnerWrapper user={user} />;
+    return redirect(`/developer-workspace/home`);
   }
 
   const { guestUser } = await getGuestUserByUsername(username);

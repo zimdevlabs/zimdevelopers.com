@@ -11,7 +11,6 @@ import { toast } from "sonner";
 type DeveloperFormProps = {
   prevStage: () => void;
   userId: string;
-  username: string;
   bio: string;
   skills: string[];
   country: string;
@@ -27,7 +26,6 @@ export default function DeveloperForm2({
   country,
   skills,
   userId,
-  username,
 }: DeveloperFormProps) {
   const [linkedInUrl, setLinkedIn] = useState<string>("");
   const [firstAdditional, setFirstAdditional] = useState<string>("");
@@ -93,7 +91,6 @@ export default function DeveloperForm2({
             </p>
             <form action={formAction}>
               <input type="hidden" value={userId} name="userId" />
-              <input type="hidden" value={username} name="username" />
               <input type="hidden" value={bio} name="bio" />
               <input
                 type="hidden"

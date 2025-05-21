@@ -32,7 +32,6 @@ export async function create_developer_profile(
     return {
       fieldError: {
         userId: err.fieldErrors.userId?.[0],
-        username: err.fieldErrors.username?.[0],
         bio: err.fieldErrors.bio?.[0],
         skills: err.fieldErrors.skills?.[0],
         country: err.fieldErrors.country?.[0],
@@ -53,7 +52,6 @@ export async function create_developer_profile(
     linkedInUrl,
     otherLinks,
     userId,
-    username,
   } = parsed.data;
 
   const existingProfile = await db.query.developerProfiles.findFirst({
@@ -85,7 +83,7 @@ export async function create_developer_profile(
     .set({ devProfileCompleted: true, updatedAt: new Date() })
     .where(eq(users.id, userId));
 
-  return redirect(`/u/${username}`);
+  return redirect("/developer-workspace/home");
 }
 
 export async function updateAvatarUrl(avatarUrl: string, userId: string) {
@@ -112,7 +110,6 @@ export async function create_employer_profile(
     return {
       fieldError: {
         userId: err.fieldErrors.userId?.[0],
-        username: err.fieldErrors.username?.[0],
         type: err.fieldErrors.type?.[0],
         companyName: err.fieldErrors.companyName?.[0],
         title: err.fieldErrors.title?.[0],
@@ -135,7 +132,6 @@ export async function create_employer_profile(
     avatar,
     socialLink,
     userId,
-    username,
   } = parsed.data;
 
   const existingProfile = await db.query.employerProfiles.findFirst({
@@ -168,5 +164,5 @@ export async function create_employer_profile(
     .set({ empProfileCompleted: true, updatedAt: new Date() })
     .where(eq(users.id, userId));
 
-  return redirect(`/u/${username}`);
+  return redirect("/hiring-workspace/home");
 }

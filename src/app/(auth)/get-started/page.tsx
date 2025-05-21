@@ -9,8 +9,12 @@ export default async function GetStartedPage() {
     return redirect("/sign-in");
   }
 
-  if (user.devProfileCompleted || user.empProfileCompleted) {
-    return redirect(`/u/${user.username}`);
+  if (user.devProfileCompleted && user.empProfileCompleted) {
+    return redirect(
+      user.devProfileCompleted
+        ? "/developer-workspace/home"
+        : "/hiring-workspace/home",
+    );
   }
 
   return <GetStartedWrapper user={user} />;
