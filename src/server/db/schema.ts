@@ -74,13 +74,18 @@ export const developerProfiles = pgTable("developer_profiles", {
 export type DeveloperProfile = typeof developerProfiles.$inferSelect;
 export type NewDeveloperProfile = typeof developerProfiles.$inferInsert;
 
+export const employerProfileTypeEnum = pgEnum("action_taken", [
+  "individual",
+  "company",
+]);
+
 export const employerProfiles = pgTable("employer_profiles", {
   id: varchar("id", { length: 21 }).primaryKey(),
   userId: varchar("user_id", { length: 21 })
     .notNull()
     .references(() => users.id),
   title: varchar("title", { length: 100 }),
-  type: varchar("type", { length: 10 }), // company or individual
+  type: employerProfileTypeEnum("type"),
   companyName: varchar("company_name", { length: 32 }),
   companyBio: varchar("company_bio", { length: 255 }),
   country: varchar("country", { length: 60 }),

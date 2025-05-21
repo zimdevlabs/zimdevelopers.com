@@ -88,6 +88,10 @@ export default function GetStartedWrapper({ user }: { user: User }) {
         if (isHiring) {
           return (
             <HiringForm2
+              setPhotoUrl={setPhotoUrl}
+              photoUrl={photoUrl}
+              userId={user.id}
+              username={user.username}
               companyName={companyName}
               isIndividual={isIndividual}
               prevStage={prevStage}

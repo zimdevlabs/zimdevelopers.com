@@ -9,8 +9,8 @@ export default async function GetStartedPage() {
     return redirect("/sign-in");
   }
 
-  if (user.devProfileCompleted && user.empProfileCompleted) {
-    return redirect(`/u/${user.id}`);
+  if (user.devProfileCompleted || user.empProfileCompleted) {
+    return redirect(`/u/${user.username}`);
   }
 
   return <GetStartedWrapper user={user} />;

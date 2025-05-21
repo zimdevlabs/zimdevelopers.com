@@ -1,7 +1,7 @@
 import { validateRequest } from "@/lib/auth/validate-request";
 import OwnerWrapper from "./owner-wrapper";
 import { getGuestUserByUsername } from "@/lib/actions/general";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import GuestWrapper from "./guest-wrapper";
 
 type Props = {
@@ -15,7 +15,12 @@ export default async function UserProfile({ params }: Props) {
 
   const { user } = await validateRequest();
 
-  if (user && user.username == username) return <OwnerWrapper user={user} />;
+  if (user && user.username == username) {
+    if (!user.devProfileCompleted && !user.empProfileCompleted) {
+      return redirect("/get-started");
+    }
+    return <OwnerWrapper user={user} />;
+  }
 
   const { guestUser } = await getGuestUserByUsername(username);
 
