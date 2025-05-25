@@ -31,8 +31,8 @@ export default function PathsCards({
       <main className="flex-1">
         <section className="container w-full px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto mb-12 max-w-3xl">
-            <Link href="/" className="mx-auto flex justify-center items-center">
-              <Logo className="hidden h-18 w-auto md:block" />
+            <Link href="/" className="mx-auto flex items-center justify-center">
+              <Logo className="hidden h-10 w-auto md:block" />
               <Icons.logoIcon className="block h-10 w-auto md:hidden" />
             </Link>
             <h1 className="mt-8 text-2xl/9 font-medium">
