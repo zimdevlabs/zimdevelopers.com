@@ -23,9 +23,9 @@ export default function SignInPageForm({
   return (
     <div className="mx-auto mt-12 w-full lg:w-96">
       <div>
-        <Link href="/">
-          <Logo className="hidden h-10 w-fit md:block" />
-          <Icons.logoIcon className="block h-10 w-fit md:hidden" />
+        <Link href="/" className="mx-auto flex items-center justify-center">
+          <Logo className="hidden h-10 w-auto md:block" />
+          <Icons.logoIcon className="block h-10 w-auto md:hidden" />
         </Link>
         <h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900">
           Sign in to your account
