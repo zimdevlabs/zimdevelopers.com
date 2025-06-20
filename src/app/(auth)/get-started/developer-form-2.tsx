@@ -1,10 +1,12 @@
 "use client";
 
+import { Icons } from "@/components/icons";
 import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { create_developer_profile } from "@/lib/profiles/actions";
 import { ChevronLeft, Linkedin, LinkIcon, PlusCircle, X } from "lucide-react";
+import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -28,6 +30,7 @@ export default function DeveloperForm2({
   userId,
 }: DeveloperFormProps) {
   const [linkedInUrl, setLinkedIn] = useState<string>("");
+  const [discordUsername, setDiscordUsername] = useState<string>("");
   const [firstAdditional, setFirstAdditional] = useState<string>("");
   const [additionalLinks, setAdditionalLinks] = useState<string[]>([]);
 
@@ -85,10 +88,7 @@ export default function DeveloperForm2({
             <span className="mb-4 block text-xs text-zinc-600 md:text-sm">
               Step 2/2
             </span>
-            <h1 className="mb-8 text-2xl">Add Social Links</h1>
-            <p className="mb-4 text-zinc-600">
-              Add two social links to verify your digital identity.
-            </p>
+            <h1 className="mb-8 text-2xl">Social Links</h1>
             <form action={formAction}>
               <input type="hidden" value={userId} name="userId" />
               <input type="hidden" value={bio} name="bio" />
@@ -106,6 +106,37 @@ export default function DeveloperForm2({
                 name="otherLinks"
               />
               <div className="space-y-8">
+                <p className="mb-4 text-sm text-zinc-600">
+                  Your Discord Username.{" "}
+                  <Link
+                    href="https://discord.com/invite/ZPTtkVt58H"
+                    className="text-primaryColor underline"
+                    target="_blank"
+                  >
+                    Join Discord
+                  </Link>
+                </p>
+                <div>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+                      <Icons.discord className="h-5 w-fit text-zinc-500" />
+                    </div>
+                    <Input
+                      value={discordUsername}
+                      onChange={(e) => setDiscordUsername(e.target.value)}
+                      required
+                      autoComplete="off"
+                      name="discordUsername"
+                      className="h-14 pl-10"
+                      placeholder="Discord Username or URL"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 space-y-8">
+                <p className="mb-4 text-sm text-zinc-600">
+                  Add two social links to verify your digital identity.
+                </p>
                 <div>
                   <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
@@ -187,7 +218,7 @@ export default function DeveloperForm2({
               ) : null}
               <div className="my-8 flex items-center justify-center">
                 <SubmitButton
-                  disabled={!linkedInUrl}
+                  disabled={!linkedInUrl || !discordUsername}
                   className="rounded-full bg-zinc-900 px-6 py-2 text-white hover:bg-zinc-800"
                 >
                   Complete

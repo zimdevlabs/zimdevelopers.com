@@ -32,6 +32,7 @@ export async function create_developer_profile(
     return {
       fieldError: {
         userId: err.fieldErrors.userId?.[0],
+        discordUsername: err.fieldErrors.discordUsername?.[0],
         bio: err.fieldErrors.bio?.[0],
         skills: err.fieldErrors.skills?.[0],
         country: err.fieldErrors.country?.[0],
@@ -52,6 +53,7 @@ export async function create_developer_profile(
     linkedInUrl,
     otherLinks,
     userId,
+    discordUsername,
   } = parsed.data;
 
   const existingProfile = await db.query.developerProfiles.findFirst({
@@ -71,6 +73,7 @@ export async function create_developer_profile(
     userId,
     bio,
     skills: JSON.parse(skills),
+    discordUsername,
     country,
     city,
     avatar,
@@ -83,7 +86,7 @@ export async function create_developer_profile(
     .set({ devProfileCompleted: true, updatedAt: new Date() })
     .where(eq(users.id, userId));
 
-  return redirect("/developer-workspace/home");
+  return redirect("/developer-workspace/dashboard");
 }
 
 export async function updateAvatarUrl(avatarUrl: string, userId: string) {
@@ -164,5 +167,5 @@ export async function create_employer_profile(
     .set({ empProfileCompleted: true, updatedAt: new Date() })
     .where(eq(users.id, userId));
 
-  return redirect("/hiring-workspace/home");
+  return redirect("/hiring-workspace/dashboard");
 }

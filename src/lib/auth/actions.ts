@@ -84,8 +84,8 @@ export async function login(
 
   return redirect(
     callbackUrl || existingUser.devProfileCompleted
-      ? "/developer-workspace/home"
-      : "/hiring-workspace/home",
+      ? "/developer-workspace/dashboard"
+      : "/hiring-workspace/dashboard",
   );
 }
 
@@ -343,7 +343,7 @@ export async function resetPassword(
 
   redirect(
     user
-      ? `${user.devProfileCompleted ? "/developer-workspace/home" : "/hiring-workspace/home"}`
+      ? `${user.devProfileCompleted ? "/developer-workspace/dashboard" : "/hiring-workspace/dashboard"}`
       : Paths.Home,
   );
 }

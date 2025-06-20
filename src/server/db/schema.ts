@@ -62,6 +62,7 @@ export const developerProfiles = pgTable("developer_profiles", {
   userId: varchar("user_id", { length: 21 })
     .notNull()
     .references(() => users.id),
+  discordUsername: varchar("discord_username", { length: 48 }).notNull(),
   bio: varchar("bio", { length: 60 }),
   skills: text("skills").array(),
   country: varchar("country", { length: 60 }),

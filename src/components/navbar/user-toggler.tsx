@@ -57,8 +57,8 @@ export default function UserToggler({ user }: UserTogglerProps) {
           <Link
             href={
               user.devProfileCompleted
-                ? "/developer-workspace/home"
-                : "/hiring-workspace/home"
+                ? "/developer-workspace/dashboard"
+                : "/hiring-workspace/dashboard"
             }
           >
             <DropdownMenuItem>Profile</DropdownMenuItem>

@@ -25,8 +25,8 @@ export default async function VerifyEmailPage({
   if (user.emailVerified)
     redirect(
       callbackUrl || user.devProfileCompleted
-        ? "/developer-workspace/home"
-        : "/hiring-workspace/home",
+        ? "/developer-workspace/dashboard"
+        : "/hiring-workspace/dashboard",
     );
 
   return (

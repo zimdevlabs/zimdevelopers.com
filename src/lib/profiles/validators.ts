@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const createDevProfileShema = z.object({
   userId: z.string().min(1, "User ID is required."),
+  discordUsername: z.string().min(1, "Discord username is required."),
   bio: z
     .string()
     .min(1, "Bio is required.")

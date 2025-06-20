@@ -24,8 +24,8 @@ export default async function SignUpPage({
   if (user)
     redirect(
       callbackUrl || user.devProfileCompleted
-        ? "/developer-workspace/home"
-        : "/hiring-workspace/home",
+        ? "/developer-workspace/dashboard"
+        : "/hiring-workspace/dashboard",
     );
 
   return <SignUpPageWrapper callbackUrl={callbackUrl} />;

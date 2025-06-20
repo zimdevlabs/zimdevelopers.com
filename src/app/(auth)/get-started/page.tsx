@@ -12,8 +12,8 @@ export default async function GetStartedPage() {
   if (user.devProfileCompleted && user.empProfileCompleted) {
     return redirect(
       user.devProfileCompleted
-        ? "/developer-workspace/home"
-        : "/hiring-workspace/home",
+        ? "/developer-workspace/dashboard"
+        : "/hiring-workspace/dashboard",
     );
   }
 

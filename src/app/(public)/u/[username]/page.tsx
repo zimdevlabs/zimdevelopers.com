@@ -18,7 +18,7 @@ export default async function UserProfile({ params }: Props) {
     if (!user.devProfileCompleted && !user.empProfileCompleted) {
       return redirect("/get-started");
     }
-    return redirect(`/developer-workspace/home`);
+    return redirect(`/developer-workspace/dashboard`);
   }
 
   const { guestUser } = await getGuestUserByUsername(username);
